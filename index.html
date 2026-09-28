@@ -136,7 +136,7 @@ td select{font-size:11px;padding:4px;border-radius:6px;border:1px solid #cdd9d6}
     <a class="paybtn" id="payPaytm"  target="_top" href="#">Paytm</a>
     <a class="paybtn" id="payOther"  target="_top" href="#">Other UPI</a>
    </div>
-   <div class="muted" style="margin-top:9px">App buttons work on mobile. If the app does not open, copy the UPI ID or scan the QR.</div>
+   <div class="muted" style="margin-top:9px">Enter <b>₹50</b> in your UPI app. If the app does not open or declines, copy the UPI ID (or scan the QR) and pay from inside your UPI app.</div>
    <button type="button" class="secondary" data-action="copyUpi">📋 Copy UPI ID</button>
    <div class="qr" id="qr"></div><div class="muted">Scan with any UPI app</div>
   </div>
@@ -204,9 +204,10 @@ td select{font-size:11px;padding:4px;border-radius:6px;border:1px solid #cdd9d6}
 /* ============================ SETTINGS ============================ */
 // Used ONLY when this page is hosted outside Apps Script (Netlify / Vercel / GitHub Pages).
 // When served from the Apps Script /exec URL, google.script.run is used automatically.
-const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbwMM727Nb0S7qVuwKSASLhGVexnznxG3rVwHvb6kquUiEu2wl9_DyeCu2VZ1tA-MnAs/exec';
+const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzLMee8dMyfrKdyQvs8XkbT48rKmm2XZj3RtMyxPGIDd8dBHIT2liwUb9fDTV608d3d/exec';
 const UPI = 'faizanmulla6@ybl', AMOUNT = '50.00', PAYEE = 'Ek Rozah Tarbiyati Workshop';
 const STORE_KEY = 'erw_pending_v5';
+const PREFILL_AMOUNT = false;
 
 /* ============================== HELPERS ============================ */
 const $ = id => document.getElementById(id);
@@ -265,10 +266,15 @@ function showScreen(id, step) {
 }
 
 /* ============================== PAYMENT ============================ */
+// Personal UPI IDs (like @ybl) are often DECLINED "for security reasons" by PhonePe/GPay/Paytm when a website
+// pre-fills the amount or note. So by default we send only payee ID + name, and the person types 50 in the app.
+// If you later get a MERCHANT/business UPI ID, set PREFILL_AMOUNT = true.
 function upiParams() {
-  let p = 'pa=' + encodeURIComponent(UPI) + '&pn=' + encodeURIComponent(PAYEE) +
-          '&am=' + AMOUNT + '&cu=INR';
-  if (state.regNo) p += '&tn=' + encodeURIComponent('Workshop ' + state.regNo);
+  let p = 'pa=' + encodeURIComponent(UPI) + '&pn=' + encodeURIComponent(PAYEE) + '&cu=INR';
+  if (PREFILL_AMOUNT) {
+    p += '&am=' + AMOUNT;
+    if (state.regNo) p += '&tn=' + encodeURIComponent('Workshop ' + state.regNo);
+  }
   return p;
 }
 function renderPayment() {
