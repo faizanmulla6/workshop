@@ -2,20 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#063f45">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>Ek Rozah Tarbiyati Workshop</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;padding:0;width:100%;min-height:100%;background:#f4f7f6;color:#183238;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+[hidden]{display:none!important}
+html,body{margin:0;padding:0;background:#f4f7f6;color:#183238;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
 body{font-size:16px;overflow-x:hidden}
 button,input,select{font:inherit}input,select{font-size:16px}
-button{border:0}
-#app{width:100%;min-height:100dvh;padding-bottom:88px}
+button{border:0;cursor:pointer}
+#app{width:100%;max-width:560px;margin:0 auto;min-height:100dvh;padding-bottom:96px;background:#f4f7f6}
 .header{background:#063f45;color:#fff;padding:calc(14px + env(safe-area-inset-top)) 16px 18px;border-radius:0 0 22px 22px}
-.headerRow{display:flex;justify-content:space-between;align-items:center}
+.headerRow{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .brand{font-size:10px;letter-spacing:1px;font-weight:800;opacity:.85}
 .adminTop{color:#fff;background:#ffffff18;border:1px solid #ffffff55;border-radius:20px;padding:8px 11px;font-size:11px;font-weight:800}
 h1{font-size:27px;line-height:1.08;margin:15px 0 5px;letter-spacing:-.6px}
@@ -28,399 +29,521 @@ h1{font-size:27px;line-height:1.08;margin:15px 0 5px;letter-spacing:-.6px}
 .step{background:#e4ece9;color:#718084;text-align:center;font-size:10px;font-weight:900;padding:8px 2px;border-radius:9px}.step.active{background:#063f45;color:#fff}
 .title{font-size:20px;font-weight:900;margin:0}.sub{font-size:12px;color:#718084;margin-top:3px}
 .notice{background:#fff8df;border:1px solid #efd98c;border-radius:12px;padding:12px;font-size:13px;line-height:1.5;margin:13px 0}
+.notice.green{background:#effaf3;border-color:#bfe3cc}
 .field{margin-top:13px}.field label{display:block;font-size:11px;font-weight:900;color:#4b5c60;margin-bottom:6px}
 .field input,.field select{width:100%;height:50px;border:1px solid #d4e0dd;border-radius:12px;background:#fff;padding:0 13px;outline:none;color:#183238}
 .field input:focus,.field select:focus{border-color:#063f45;box-shadow:0 0 0 3px #063f4514}
-.primary,.secondary,.gold{width:100%;min-height:52px;border-radius:13px;margin-top:14px;font-weight:900}.primary{background:#063f45;color:#fff}.secondary{background:#edf3f1;color:#063f45}.gold{background:#d8ad48;color:#17363a}
-.error{color:#a92e2e;font-size:12px;font-weight:800;margin-top:8px}.muted{color:#718084;font-size:12px}
+.primary,.secondary,.gold{display:block;width:100%;min-height:52px;border-radius:13px;margin-top:14px;font-weight:900}
+.primary{background:#063f45;color:#fff}.secondary{background:#edf3f1;color:#063f45}.gold{background:#d8ad48;color:#17363a}
+.primary:disabled,.secondary:disabled,.gold:disabled{opacity:.6;cursor:wait}
+.error{color:#a92e2e;font-size:13px;font-weight:800;margin-top:8px;line-height:1.45}
+.error button{background:none;color:#063f45;text-decoration:underline;font-weight:900;padding:0}
+.muted{color:#718084;font-size:12px}
 .paymentBox{text-align:center;background:#f3faf7;border:1px solid #d9eae4;border-radius:15px;padding:15px}
 .amount{font-size:38px;font-weight:950;color:#063f45}.upi{font-size:17px;font-weight:900;color:#063f45;margin:5px 0;word-break:break-word}
-.paygrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.paybtn{min-height:49px;border:1px solid #d4e2de;border-radius:12px;background:#fff;color:#063f45;font-weight:900}
-.qr{margin:13px auto 0;width:min(220px,70vw);height:min(220px,70vw);display:flex;align-items:center;justify-content:center;background:#fff;border-radius:12px}
+.paygrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}
+.paybtn{display:flex;align-items:center;justify-content:center;min-height:49px;border:1px solid #d4e2de;border-radius:12px;background:#fff;color:#063f45;font-weight:900;text-decoration:none}
+.qr{margin:13px auto 6px;width:min(220px,70vw);height:min(220px,70vw);display:flex;align-items:center;justify-content:center;background:#fff;border-radius:12px}
 .qr img{max-width:100%;max-height:100%}
 .upload{border:2px dashed #b7c9c4;border-radius:14px;padding:14px;text-align:center;margin-top:12px;background:#fafcfb}
 .upload input{width:100%;margin-top:9px}
 .preview{width:100%;max-height:220px;object-fit:contain;border-radius:10px;margin-top:9px}
-.confirm{border:2px solid #d8ad48;background:#fffdf4;border-radius:17px;padding:16px}.reg{text-align:center;font-size:30px;font-weight:950;color:#063f45;margin:8px 0 13px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.info{background:#f4f7f6;border-radius:10px;padding:10px}.info small{display:block;color:#718084;font-size:9px;font-weight:800}.info b{font-size:12px}
-.bottom{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#063f45;padding:7px 6px calc(7px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,1fr);box-shadow:0 -5px 20px #0002}
-.bottom button{background:transparent;color:#fff;font-size:10px;font-weight:900;padding:7px 2px;border-radius:9px}.bottom button.active{background:#ffffff18}
-.adminHead{display:flex;justify-content:space-between;align-items:center}.logout{background:#feecec;color:#a92e2e;padding:8px 10px;border-radius:9px;font-weight:900;font-size:11px}
-.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-top:12px}.stat{background:#f4f7f6;border-radius:10px;text-align:center;padding:9px}.stat b{display:block;font-size:21px;color:#063f45}.stat span{font-size:10px;color:#718084;font-weight:800}
-.tableWrap{width:100%;overflow-x:auto;border:1px solid #e1e9e6;border-radius:10px;margin-top:10px}table{border-collapse:collapse;min-width:800px;width:800px}th,td{font-size:10px;padding:8px;border-bottom:1px solid #e1e9e6;text-align:left}th{background:#063f45;color:#fff}
+.confirm{border:2px solid #d8ad48;background:#fffdf4;border-radius:17px;padding:16px}
+.reg{text-align:center;font-size:30px;font-weight:950;color:#063f45;margin:8px 0 13px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.info{background:#f4f7f6;border-radius:10px;padding:10px}.info small{display:block;color:#718084;font-size:9px;font-weight:800}.info b{font-size:12px;word-break:break-word}
+.bottom{position:fixed;left:50%;transform:translateX(-50%);width:100%;max-width:560px;bottom:0;z-index:20;background:#063f45;padding:7px 6px calc(7px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,1fr);box-shadow:0 -5px 20px #0002}
+.bottom button{background:transparent;color:#fff;font-size:10px;font-weight:900;padding:7px 2px;border-radius:9px}.bottom button.active{background:#ffffff22}
+.adminHead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.logout{background:#feecec;color:#a92e2e;padding:8px 10px;border-radius:9px;font-weight:900;font-size:11px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
+.stat{background:#f4f7f6;border-radius:10px;text-align:center;padding:9px 4px}.stat b{display:block;font-size:21px;color:#063f45}.stat span{font-size:10px;color:#718084;font-weight:800}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tableWrap{width:100%;overflow-x:auto;border:1px solid #e1e9e6;border-radius:10px;margin-top:10px}
+table{border-collapse:collapse;min-width:900px;width:100%}
+th,td{font-size:11px;padding:8px;border-bottom:1px solid #e1e9e6;text-align:left;white-space:nowrap}
+th{background:#063f45;color:#fff}
+td select{font-size:11px;padding:4px;border-radius:6px;border:1px solid #cdd9d6}
 .footer{text-align:center;color:#718084;font-size:10px;padding:15px 8px}
-@media(min-width:700px){body:before{content:"Mobile version";display:block;text-align:center;padding:10px;background:#063f45;color:white;font-size:12px}}
-@media(max-width:350px){h1{font-size:24px}.grid{grid-template-columns:1fr}.paygrid{grid-template-columns:1fr}}
+#toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:#183238;color:#fff;padding:10px 16px;border-radius:22px;font-size:13px;font-weight:700;z-index:50;max-width:88vw;text-align:center;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.on{opacity:1}
+@media(max-width:350px){h1{font-size:24px}.grid,.paygrid,.row2{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+@media print{
+ body *{visibility:hidden}
+ #confirmation,#confirmation *{visibility:visible}
+ #confirmation{position:absolute;left:0;top:0;width:100%}
+ #confirmation [data-noprint]{display:none!important}
+}
 </style>
 </head>
 <body>
 <div id="app">
 <header class="header">
- <div class="headerRow"><div class="brand">EK ROZAH TARBIYATI WORKSHOP</div><button type="button" class="adminTop" onclick="openAdmin()">🔒 ADMIN</button></div>
+ <div class="headerRow"><div class="brand">EK ROZAH TARBIYATI WORKSHOP</div><button type="button" class="adminTop" data-action="admin">🔒 ADMIN</button></div>
  <h1>Tahaffuz-e-Aqeedah<br>Wa Manhaj</h1>
  <div class="subtitle">Registration Portal</div>
  <div class="eventChip">18 October 2026 • Sunday • ₹50</div>
 </header>
 
 <main class="content">
-<div class="steps"><div class="step active" id="st1">1 REGISTRATION</div><div class="step" id="st2">2 PAYMENT</div><div class="step" id="st3">3 CONFIRM</div></div>
+<div class="steps" id="steps"><div class="step active" id="st1">1 REGISTRATION</div><div class="step" id="st2">2 PAYMENT</div><div class="step" id="st3">3 CONFIRM</div></div>
 
+<!-- ============ 1. REGISTER ============ -->
 <section id="registerCard" class="screen active">
-<div class="card">
- <div class="title">Participant Registration</div><div class="sub">For men and women above 15 years</div>
- <div class="notice"><b>Registration fee: ₹50</b><br>Last registration date: <b>16 October 2026</b></div>
- <form id="form">
-  <div class="field"><label>FULL NAME *</label><input id="name" required autocomplete="name" placeholder="Enter your full name"></div>
-  <div class="field"><label>AGE *</label><input id="age" type="number" min="16" max="120" required placeholder="Enter age"></div>
-  <div class="field"><label>GENDER *</label><select id="gender" required><option value="">Select gender</option><option>Male</option><option>Female</option></select></div>
-  <div class="field"><label>LOCATION *</label><select id="city" required><option value="">Select location</option><option>Solapur</option><option>Outside solapur</option></select></div>
-  <div class="field"><label>MOBILE NUMBER *</label><input id="mobile" inputmode="numeric" autocomplete="tel" maxlength="10" required placeholder="10-digit mobile number"></div>
-  <div class="field"><label>LANGUAGE *</label><select id="language" required><option value="">Select language</option><option>Urdu</option><option>English</option><option>Hindi</option></select></div>
-  <div id="formError" class="error"></div>
-  <button class="primary" id="continueBtn" type="submit">Continue to Payment ₹50 →</button>
- </form>
-</div>
-<div class="card"><div class="title">Program Details</div><div class="grid" style="margin-top:12px">
-<div class="info"><small>VENUE</small><b>Masjid-e-Umar Khalifa</b></div><div class="info"><small>DATE</small><b>18 October 2026</b></div><div class="info"><small>ADDRESS</small><b>Sumaiyya Nagar, Nai Zindagi, Solapur</b></div><div class="info"><small>TIME</small><b>9:30 AM to Isha</b></div></div></div>
-</section>
-
-<section id="paymentCard" class="screen">
-<div class="card">
- <div class="title">Complete Payment</div><div class="sub">Registration No: <b id="payReg">Not generated yet</b></div>
- <div class="paymentBox" style="margin-top:13px"><div class="muted">PAYMENT AMOUNT</div><div class="amount">₹50</div><div class="upi">faizanmulla6@ybl</div><div class="muted">UPI ID</div>
-  <div class="paygrid"><button class="paybtn" onclick="payUPI('gpay')">Google Pay</button><button class="paybtn" onclick="payUPI('phonepe')">PhonePe</button><button class="paybtn" onclick="payUPI('paytm')">Paytm</button><button class="paybtn" onclick="payUPI('other')">Other UPI</button></div>
-  <button class="secondary" onclick="copyUPI()">📋 Copy UPI ID</button>
-  <div class="qr" id="qr"></div><div class="muted">Scan with any UPI app</div>
+ <div class="card" id="resumeBox" hidden>
+  <div class="title">Unfinished registration</div>
+  <div class="sub">Registration No: <b id="resumeReg"></b></div>
+  <div class="notice">Your registration is saved but payment screenshot is pending.</div>
+  <button type="button" class="primary" style="margin-top:0" data-action="resume">Continue to Payment →</button>
+  <button type="button" class="secondary" data-action="discardResume">Start a new registration</button>
  </div>
- <div class="notice"><b>After payment:</b> Upload a screenshot showing the successful payment. UTR entry is not required.</div>
- <div class="upload"><b>📸 Payment Screenshot *</b><div class="muted">JPG / PNG / WEBP • Maximum 5 MB</div><input id="shot" type="file" accept="image/jpeg,image/png,image/webp" onchange="previewShot(event)"><img id="shotPreview" class="preview" style="display:none"></div>
- <div id="payError" class="error"></div>
- <button class="primary" id="completeBtn" onclick="completePayment()">Submit Screenshot & Confirm</button>
- <button class="secondary" onclick="showScreen('registerCard',1)">← Back to Registration</button>
-</div>
+
+ <div class="card">
+  <div class="title">Participant Registration</div><div class="sub">For men and women above 15 years</div>
+  <div class="notice"><b>Registration fee: ₹50</b><br>Last registration date: <b>16 October 2026</b></div>
+  <form id="form" onsubmit="return false;" novalidate>
+   <div class="field"><label for="name">FULL NAME *</label><input id="name" autocomplete="name" placeholder="Enter your full name"></div>
+   <div class="field"><label for="age">AGE *</label><input id="age" type="number" inputmode="numeric" min="16" max="120" placeholder="Enter age"></div>
+   <div class="field"><label for="gender">GENDER *</label><select id="gender"><option value="">Select gender</option><option>Male</option><option>Female</option></select></div>
+   <div class="field"><label for="city">LOCATION *</label><select id="city"><option value="">Select location</option><option>Solapur</option><option>Outside Solapur</option></select></div>
+   <div class="field"><label for="mobile">MOBILE NUMBER *</label><input id="mobile" type="tel" inputmode="numeric" autocomplete="tel" maxlength="14" placeholder="10-digit mobile number"></div>
+   <div class="field"><label for="language">LANGUAGE *</label><select id="language"><option value="">Select language</option><option>Urdu</option><option>English</option><option>Hindi</option></select></div>
+   <div id="formError" class="error" role="alert"></div>
+   <button class="primary" id="continueBtn" type="submit">Continue to Payment ₹50 →</button>
+  </form>
+ </div>
+
+ <div class="card"><div class="title">Program Details</div>
+  <div class="grid" style="margin-top:12px">
+   <div class="info"><small>VENUE</small><b>Masjid-e-Umar Khalifa</b></div>
+   <div class="info"><small>DATE</small><b>18 October 2026</b></div>
+   <div class="info"><small>ADDRESS</small><b>Sumaiyya Nagar, Nai Zindagi, Solapur</b></div>
+   <div class="info"><small>TIME</small><b>9:30 AM to Isha</b></div>
+  </div>
+ </div>
 </section>
 
+<!-- ============ 2. PAYMENT ============ -->
+<section id="paymentCard" class="screen">
+ <div class="card">
+  <div class="title">Complete Payment</div><div class="sub">Registration No: <b id="payReg">—</b></div>
+  <div class="paymentBox" style="margin-top:13px">
+   <div class="muted">PAYMENT AMOUNT</div><div class="amount">₹50</div>
+   <div class="upi" id="upiText">faizanmulla6@ybl</div><div class="muted">UPI ID</div>
+   <div class="paygrid">
+    <a class="paybtn" id="payGpay"   target="_top" href="#">Google Pay</a>
+    <a class="paybtn" id="payPhonepe" target="_top" href="#">PhonePe</a>
+    <a class="paybtn" id="payPaytm"  target="_top" href="#">Paytm</a>
+    <a class="paybtn" id="payOther"  target="_top" href="#">Other UPI</a>
+   </div>
+   <div class="muted" style="margin-top:9px">App buttons work on mobile. If the app does not open, copy the UPI ID or scan the QR.</div>
+   <button type="button" class="secondary" data-action="copyUpi">📋 Copy UPI ID</button>
+   <div class="qr" id="qr"></div><div class="muted">Scan with any UPI app</div>
+  </div>
+  <div class="notice"><b>After payment:</b> upload a screenshot showing the successful payment. UTR entry is not required.</div>
+  <div class="upload"><b>📸 Payment Screenshot *</b><div class="muted">JPG / PNG / WEBP</div>
+   <input id="shot" type="file" accept="image/jpeg,image/png,image/webp,image/*">
+   <img id="shotPreview" class="preview" alt="Screenshot preview" hidden>
+  </div>
+  <div id="payError" class="error" role="alert"></div>
+  <button type="button" class="primary" id="completeBtn" data-action="submitShot">Submit Screenshot &amp; Confirm</button>
+  <button type="button" class="secondary" data-action="register">← Back to Registration</button>
+ </div>
+</section>
+
+<!-- ============ 3. CONFIRM ============ -->
 <section id="confirmCard" class="screen">
-<div class="card"><div id="confirmation" class="confirm"></div><button class="gold" onclick="window.print()">📄 Save / Print PDF</button><button class="secondary" onclick="shareConfirm()">📤 Share Confirmation</button></div>
+ <div class="card"><div id="confirmation" class="confirm"></div>
+  <button type="button" class="gold" data-action="print">📄 Save / Print PDF</button>
+  <button type="button" class="secondary" data-action="share">📤 Share Confirmation</button>
+ </div>
 </section>
 
+<!-- ============ LOOKUP ============ -->
 <section id="lookupCard" class="screen">
-<div class="card"><div class="title">My Registration</div><div class="sub">Find your confirmation using registration number + mobile.</div>
-<div class="field"><label>REGISTRATION NUMBER</label><input id="lookupNo" placeholder="TRW-000001"></div>
-<div class="field"><label>MOBILE NUMBER</label><input id="lookupMob" inputmode="numeric" maxlength="10" placeholder="10-digit mobile"></div>
-<div id="lookupError" class="error"></div><button class="primary" onclick="lookup()">Find Registration</button></div>
+ <div class="card"><div class="title">My Registration</div><div class="sub">Find your confirmation using registration number + mobile.</div>
+  <div class="field"><label for="lookupNo">REGISTRATION NUMBER</label><input id="lookupNo" autocapitalize="characters" placeholder="TRW-000001"></div>
+  <div class="field"><label for="lookupMob">MOBILE NUMBER</label><input id="lookupMob" type="tel" inputmode="numeric" maxlength="14" placeholder="10-digit mobile"></div>
+  <div id="lookupError" class="error" role="alert"></div>
+  <button type="button" class="primary" id="lookupBtn" data-action="doLookup">Find Registration</button>
+ </div>
 </section>
 
+<!-- ============ ADMIN ============ -->
 <section id="adminCard" class="screen">
-<div class="card">
-<div class="adminHead"><div><div class="title">Admin Dashboard</div><div class="sub">Protected management panel</div></div><button class="logout" onclick="logoutAdmin()">Logout</button></div>
-<div id="adminLogin"><div class="field"><label>ADMIN PIN</label><input id="pin" type="password" inputmode="numeric" maxlength="4" placeholder="Enter PIN"></div><div id="adminError" class="error"></div><button class="primary" onclick="loginAdmin()">Unlock Dashboard</button></div>
-<div id="dashboard" style="display:none"><div class="stats" id="stats"></div><div class="field"><input id="adminSearch" placeholder="Search name / mobile / registration..." oninput="filterAdmin()"></div><button class="secondary" onclick="loadAdmin()">↻ Refresh</button><div class="tableWrap"><table><thead><tr><th>Reg No</th><th>Name</th><th>Age</th><th>Gender</th><th>City</th><th>Mobile</th><th>Language</th><th>Payment</th><th>Status</th><th>Screenshot</th></tr></thead><tbody id="adminRows"></tbody></table></div></div>
-</div>
+ <div class="card">
+  <div class="adminHead"><div><div class="title">Admin Dashboard</div><div class="sub">Protected management panel</div></div><button type="button" class="logout" data-action="adminLogout">Logout</button></div>
+  <div id="adminLogin"><div class="field"><label for="pin">ADMIN PIN</label><input id="pin" type="password" inputmode="numeric" autocomplete="off" placeholder="Enter PIN"></div>
+   <div id="adminError" class="error" role="alert"></div>
+   <button type="button" class="primary" id="adminLoginBtn" data-action="adminLogin">Unlock Dashboard</button></div>
+  <div id="dashboard" hidden>
+   <div class="stats" id="stats"></div>
+   <div class="field"><input id="adminSearch" placeholder="Search name / mobile / registration..."></div>
+   <div class="row2"><button type="button" class="secondary" data-action="adminRefresh">↻ Refresh</button><button type="button" class="secondary" data-action="adminExport">⬇ Export CSV</button></div>
+   <div id="adminMsg" class="muted" style="margin-top:8px"></div>
+   <div class="tableWrap"><table><thead><tr><th>Reg No</th><th>Name</th><th>Age</th><th>Gender</th><th>City</th><th>Mobile</th><th>Language</th><th>Payment</th><th>Status</th><th>Screenshot</th></tr></thead><tbody id="adminRows"></tbody></table></div>
+  </div>
+ </div>
 </section>
 </main>
 
 <nav class="bottom">
-<button id="navReg" class="active" onclick="showScreen('registerCard',1)">📝<br>Register</button>
-<button id="navPay" onclick="showPaymentNav()">💳<br>Payment</button>
-<button id="navLookup" onclick="showScreen('lookupCard',3)">🔎<br>My Registration</button>
-<button type="button" id="navAdmin" onclick="openAdmin()">🔒<br>Admin</button>
+ <button type="button" id="navReg" class="active" data-action="register">📝<br>Register</button>
+ <button type="button" id="navPay" data-action="payment">💳<br>Payment</button>
+ <button type="button" id="navLookup" data-action="lookup">🔎<br>My Registration</button>
+ <button type="button" id="navAdmin" data-action="admin">🔒<br>Admin</button>
 </nav>
 <div class="footer">ZILAYI JAMIAT AHLE HADEES, SOLAPUR<br>70284 88819 • 99608 05017</div>
 </div>
+<div id="toast"></div>
+
 <script>
-function showScreen(id,step){
- document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- if(step) steps(step);
- ['navReg','navPay','navLookup','navAdmin'].forEach(x=>document.getElementById(x)?.classList.remove('active'));
- const map={registerCard:'navReg',paymentCard:'navPay',lookupCard:'navLookup',adminCard:'navAdmin',confirmCard:'navLookup'};
- document.getElementById(map[id])?.classList.add('active');
- window.scrollTo(0,0);
-}
-function showPaymentNav(){
- showScreen('paymentCard',2);
- if(typeof makeQR==='function') makeQR();
-}
-</script>
-<script>
-// ===================== BACKEND =====================
-// For Netlify/Vercel: paste the Apps Script Web App URL here.
-// Example:
-// const BACKEND_URL='https://script.google.com/macros/s/AKfycbzUGH2eMzwuAN8IDkTezPMVsDwlhuFadKXTFiny8QVkJVZVYtBHQe7mJ_nqXgw5Ohat/exec';
-const BACKEND_URL='https://script.google.com/macros/s/AKfycbxDqIXAXju4ErLyOL_ceB87WumGDzPH2ihbhGN_66yTDATC22fHNgNa6Mw1xlpReps_/exec';
-const UPI='faizanmulla6@ybl', AMOUNT='50', PAYEE='Ek Rozah Tarbiyati Workshop';
-let regNo='',participant={},adminPin='',adminData=[];
+(function () {
+'use strict';
 
-const $=id=>document.getElementById(id);
-const hide=id=>$(id).classList.add('hidden');
-const show=id=>$(id).classList.remove('hidden');
-const clean=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function err(e){return e?.message||String(e||'Something went wrong');}
-function top(){window.scrollTo({top:0,behavior:'smooth'})}
-function steps(n){['st1','st2','st3'].forEach((x,i)=>$(x).classList.toggle('active',i<n));}
+/* ============================ SETTINGS ============================ */
+// Used ONLY when this page is hosted outside Apps Script (Netlify / Vercel / GitHub Pages).
+// When served from the Apps Script /exec URL, google.script.run is used automatically.
+const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbwMM727Nb0S7qVuwKSASLhGVexnznxG3rVwHvb6kquUiEu2wl9_DyeCu2VZ1tA-MnAs/exec';
+const UPI = 'faizanmulla6@ybl', AMOUNT = '50.00', PAYEE = 'Ek Rozah Tarbiyati Workshop';
+const STORE_KEY = 'erw_pending_v5';
 
-// A robust UPI intent strategy.
-// `upi://pay` is used for UPI apps; browser-specific intent URLs are not reliable.
-// We offer app-specific intent URLs where supported and always provide QR + copy fallback.
-function upiUrl(){
- return 'upi://pay?pa='+encodeURIComponent(UPI)+'&pn='+encodeURIComponent(PAYEE)+'&am='+encodeURIComponent(AMOUNT)+'&cu=INR';
-}
-function payUPI(app){
- const u=upiUrl();
- // App-specific intent URI. If a browser doesn't launch it, the visible fallback remains.
- const urls={
-   gpay:'tez://upi/pay?pa='+encodeURIComponent(UPI)+'&pn='+encodeURIComponent(PAYEE)+'&am='+AMOUNT+'&cu=INR',
-   phonepe:'phonepe://pay?pa='+encodeURIComponent(UPI)+'&pn='+encodeURIComponent(PAYEE)+'&am='+AMOUNT+'&cu=INR',
-   paytm:'paytmmp://pay?pa='+encodeURIComponent(UPI)+'&pn='+encodeURIComponent(PAYEE)+'&am='+AMOUNT+'&cu=INR',
-   other:u
- };
- const target=urls[app]||u;
- window.location.href=target;
- setTimeout(()=>{ if(!document.hidden) alert('If the UPI app did not open, tap “Copy UPI ID” and pay ₹50 in your UPI app, or scan the QR code.'); },1200);
-}
-function copyUPI(){
- if(navigator.clipboard) navigator.clipboard.writeText(UPI).then(()=>alert('UPI ID copied: '+UPI));
- else prompt('Copy UPI ID',UPI);
-}
-function makeQR(){
- const text=upiUrl();
- // Google Chart is avoided. Generate a QR through a public QR image endpoint for display.
- $('qr').innerHTML='<img alt="UPI QR Code" src="https://quickchart.io/qr?size=220&text='+encodeURIComponent(text)+'">';
+/* ============================== HELPERS ============================ */
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const digits10 = v => String(v || '').replace(/\D/g, '').slice(-10);
+const MOBILE_RE = /^[6-9]\d{9}$/;
+const state = { regNo:'', mobile:'', name:'', participant:null, pin:'', rows:[], shot:null, shotBusy:null };
+
+function store(v) { try { v ? localStorage.setItem(STORE_KEY, JSON.stringify(v)) : localStorage.removeItem(STORE_KEY); } catch (e) {} }
+function loadStore() { try { return JSON.parse(localStorage.getItem(STORE_KEY) || 'null'); } catch (e) { return null; } }
+
+let toastTimer;
+function toast(t) { const el = $('toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('on'), 2600); }
+function scrollTop() { window.scrollTo(0, 0); }
+
+/* ============================== BACKEND ============================ */
+const hasGAS = typeof google !== 'undefined' && google.script && google.script.run;
+
+function call(fn, args) {
+  return new Promise((resolve, reject) => {
+    if (hasGAS) {
+      const run = google.script.run
+        .withSuccessHandler(resolve)
+        .withFailureHandler(e => reject(new Error((e && e.message) || String(e))));
+      run[fn].apply(run, args);
+      return;
+    }
+    if (!BACKEND_URL) { reject(new Error('Backend URL is not configured.')); return; }
+    const ctl = new AbortController();
+    const timer = setTimeout(() => ctl.abort(), 90000);
+    fetch(BACKEND_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },   // simple request: no CORS pre-flight
+      body: JSON.stringify({ fn: fn, args: args }),
+      signal: ctl.signal
+    })
+      .then(r => r.text())
+      .then(t => { try { resolve(JSON.parse(t)); } catch (e) { reject(new Error('Server returned an unexpected response. Please try again.')); } })
+      .catch(e => reject(new Error(e.name === 'AbortError' ? 'Request timed out. Check your internet and try again.' : 'Network error. Check your internet and try again.')))
+      .finally(() => clearTimeout(timer));
+  });
 }
 
-async function apiGet(action,data={}){
- const q=new URLSearchParams({api:'1',action,...data});
- const r=await fetch(BACKEND_URL+'?'+q.toString(),{cache:'no-store'});
- return r.json();
-}
-async function apiPost(action,data={}){
- const r=await fetch(BACKEND_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,...data})});
- return r.json();
-}
-function server(method,args,ok,bad){
- if(BACKEND_URL){
-   const fn=method==='register'?()=>apiPost('register',{data:args.data}):()=>apiPost('uploadScreenshot',args);
-   fn().then(ok).catch(bad);
- }else{
-   const r=google.script.run.withSuccessHandler(ok).withFailureHandler(bad);
-   if(method==='register')r.submitRegistration(args.data);
-   else if(method==='uploadScreenshot')r.uploadPaymentScreenshot(args.registrationNo,args.mobile,args.fileData);
-   else if(method==='lookup')r.getRegistration(args.registrationNo,args.mobile);
-   else if(method==='stats')r.adminStats(args.pin);
-   else if(method==='list')r.adminList(args.pin);
- }
+/* ============================== NAVIGATION ========================= */
+const NAV = { registerCard:'navReg', paymentCard:'navPay', confirmCard:'navLookup', lookupCard:'navLookup', adminCard:'navAdmin' };
+
+function steps(n) { ['st1','st2','st3'].forEach((x, i) => $(x).classList.toggle('active', i < n)); }
+function showScreen(id, step) {
+  document.querySelectorAll('.screen').forEach(x => x.classList.remove('active'));
+  $(id).classList.add('active');
+  $('steps').hidden = !(id === 'registerCard' || id === 'paymentCard' || id === 'confirmCard');
+  if (step) steps(step);
+  ['navReg','navPay','navLookup','navAdmin'].forEach(x => $(x).classList.remove('active'));
+  $(NAV[id]).classList.add('active');
+  scrollTop();
 }
 
-$('form').addEventListener('submit',e=>{
- e.preventDefault();$('formError').textContent='';
- participant={name:$('name').value.trim(),age:$('age').value,gender:$('gender').value,city:$('city').value,mobile:$('mobile').value.trim(),language:$('language').value};
- if(!participant.name)return $('formError').textContent='Enter your name.';
- if(Number(participant.age)<16)return $('formError').textContent='Registration is for persons above 15 years.';
- if(!/^[6-9]\\d{9}$/.test(participant.mobile))return $('formError').textContent='Enter a valid 10-digit mobile number.';
- if(!participant.gender||!participant.city||!participant.language)return $('formError').textContent='Please select all required fields.';
- $('continueBtn').disabled=true;$('continueBtn').textContent='Creating registration...';
- server('register',{data:participant},res=>{
-  $('continueBtn').disabled=false;$('continueBtn').textContent='Continue → Payment ₹50';
-  if(!res.ok)return $('formError').textContent=res.message||'Registration failed.';
-  regNo=res.registrationNo;$('payReg').textContent=regNo;
-  hide('registerCard');show('paymentCard');steps(2);makeQR();top();
- },e=>{$('continueBtn').disabled=false;$('continueBtn').textContent='Continue → Payment ₹50';$('formError').textContent=err(e)});
+/* ============================== PAYMENT ============================ */
+function upiParams() {
+  let p = 'pa=' + encodeURIComponent(UPI) + '&pn=' + encodeURIComponent(PAYEE) +
+          '&am=' + AMOUNT + '&cu=INR';
+  if (state.regNo) p += '&tn=' + encodeURIComponent('Workshop ' + state.regNo);
+  return p;
+}
+function renderPayment() {
+  const p = upiParams();
+  $('payReg').textContent = state.regNo || '—';
+  $('upiText').textContent = UPI;
+  $('payGpay').href    = 'tez://upi/pay?' + p;
+  $('payPhonepe').href = 'phonepe://pay?' + p;
+  $('payPaytm').href   = 'paytmmp://upi/pay?' + p;
+  $('payOther').href   = 'upi://pay?' + p;
+  const qrText = encodeURIComponent('upi://pay?' + p);
+  const img = new Image();
+  img.alt = 'UPI QR Code';
+  img.src = 'https://quickchart.io/qr?size=220&margin=1&text=' + qrText;
+  img.onerror = function () { img.onerror = null; img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + qrText; };
+  $('qr').innerHTML = ''; $('qr').appendChild(img);
+  $('payError').textContent = '';
+}
+function copyUpi() {
+  const done = () => toast('UPI ID copied: ' + UPI);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(UPI).then(done, fallback);
+  } else fallback();
+  function fallback() {
+    const t = document.createElement('textarea'); t.value = UPI; t.style.position = 'fixed'; t.style.opacity = '0';
+    document.body.appendChild(t); t.select();
+    let ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(t);
+    ok ? done() : window.prompt('Copy UPI ID', UPI);
+  }
+}
+function goPayment() {
+  if (!state.regNo) { toast('Please complete registration first.'); showScreen('registerCard', 1); return; }
+  renderPayment(); showScreen('paymentCard', 2);
+}
+
+/* =========================== IMAGE HANDLING ======================== */
+function readAsDataURL(file) {
+  return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = () => rej(new Error('Could not read the file.')); r.readAsDataURL(file); });
+}
+// Shrinks big phone screenshots (faster upload on weak networks) -> JPEG, max 1400px
+async function prepareImage(file) {
+  const original = await readAsDataURL(file);
+  try {
+    const img = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = original; });
+    const max = 1400, scale = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
+    const c = document.createElement('canvas');
+    c.width = Math.round(img.naturalWidth * scale); c.height = Math.round(img.naturalHeight * scale);
+    const ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height); ctx.drawImage(img, 0, 0, c.width, c.height);
+    return { name: file.name.replace(/\.\w+$/, '') + '.jpg', type: 'image/jpeg', data: c.toDataURL('image/jpeg', 0.82) };
+  } catch (e) {
+    if (file.size > 5 * 1024 * 1024) throw new Error('File is larger than 5 MB.');
+    return { name: file.name, type: file.type || 'image/jpeg', data: original };
+  }
+}
+function onShotChange(ev) {
+  const f = ev.target.files[0];
+  state.shot = null; $('shotPreview').hidden = true; $('payError').textContent = '';
+  if (!f) return;
+  if (!/^image\//.test(f.type)) { $('payError').textContent = 'Please choose an image file.'; ev.target.value = ''; return; }
+  state.shotBusy = prepareImage(f).then(o => { state.shot = o; $('shotPreview').src = o.data; $('shotPreview').hidden = false; })
+    .catch(e => { $('payError').textContent = e.message; ev.target.value = ''; })
+    .finally(() => { state.shotBusy = null; });
+}
+
+async function submitShot() {
+  $('payError').textContent = '';
+  if (!state.regNo || !state.mobile) { toast('Please complete registration first.'); showScreen('registerCard', 1); return; }
+  if (state.shotBusy) await state.shotBusy;
+  if (!state.shot) { $('payError').textContent = 'Please upload your successful payment screenshot.'; return; }
+  const btn = $('completeBtn'), label = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Uploading screenshot...';
+  try {
+    const res = await call('uploadPaymentScreenshot', [state.regNo, state.mobile, state.shot]);
+    if (!res || res.ok === false) throw new Error((res && res.message) || 'Upload failed.');
+    state.participant = res; store(null);
+    renderConfirm(res); showScreen('confirmCard', 3);
+  } catch (e) {
+    $('payError').textContent = e.message;
+  } finally { btn.disabled = false; btn.textContent = label; }
+}
+
+/* ============================ REGISTRATION ========================= */
+async function onRegister(ev) {
+  ev.preventDefault();
+  const err = $('formError'); err.textContent = '';
+  const p = {
+    name: $('name').value.trim().replace(/\s+/g, ' '), age: $('age').value.trim(),
+    gender: $('gender').value, city: $('city').value,
+    mobile: digits10($('mobile').value), language: $('language').value
+  };
+  if (p.name.length < 2) { err.textContent = 'Enter your full name.'; return; }
+  if (!p.age || Number(p.age) < 16) { err.textContent = 'Registration is for persons above 15 years.'; return; }
+  if (Number(p.age) > 120) { err.textContent = 'Enter a valid age.'; return; }
+  if (!p.gender || !p.city || !p.language) { err.textContent = 'Please select all required fields.'; return; }
+  if (!MOBILE_RE.test(p.mobile)) { err.textContent = 'Enter a valid 10-digit mobile number.'; return; }
+
+  const btn = $('continueBtn'), label = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Creating registration...';
+  try {
+    const res = await call('submitRegistration', [p]);
+    if (!res || res.ok === false) {
+      err.textContent = (res && res.message) || 'Registration failed.';
+      if (res && res.code === 'ALREADY_REGISTERED') {
+        err.innerHTML = esc(res.message) + ' <button type="button" data-action="prefillLookup" data-reg="' + esc(res.registrationNo) + '" data-mob="' + esc(p.mobile) + '">View my registration</button>';
+      }
+      return;
+    }
+    state.regNo = res.registrationNo; state.mobile = p.mobile; state.name = p.name;
+    store({ regNo: state.regNo, mobile: state.mobile, name: state.name });
+    if (res.resumed) toast('Your earlier registration was found. Please complete payment.');
+    renderPayment(); showScreen('paymentCard', 2);
+  } catch (e) {
+    err.textContent = e.message;
+  } finally { btn.disabled = false; btn.textContent = label; }
+}
+
+function checkPending() {
+  const s = loadStore();
+  if (s && s.regNo && s.mobile) {
+    state.regNo = s.regNo; state.mobile = s.mobile; state.name = s.name || '';
+    $('resumeReg').textContent = s.regNo; $('resumeBox').hidden = false;
+  } else $('resumeBox').hidden = true;
+}
+
+/* ============================ CONFIRMATION ========================= */
+function renderConfirm(d) {
+  const ok = String(d.registrationStatus).toUpperCase() === 'CONFIRMED';
+  const cancelled = String(d.registrationStatus).toUpperCase() === 'CANCELLED';
+  const head = cancelled ? 'REGISTRATION CANCELLED' : ok ? 'REGISTRATION CONFIRMED' : 'PAYMENT PENDING';
+  const line = cancelled ? '<div style="font-weight:900;color:#a92e2e">Cancelled — contact the organisers</div>'
+    : ok ? '<div style="font-weight:900;color:#16734f">✓ Payment Screenshot Received</div>'
+    : '<div style="font-weight:900;color:#a97a00">Payment screenshot not uploaded yet</div>';
+  $('confirmation').innerHTML =
+   '<div style="text-align:center"><div class="muted">' + head + '</div><div class="reg">' + esc(d.registrationNo) + '</div>' + line + '</div>' +
+   '<div class="grid" style="margin-top:13px">' +
+    info('NAME', d.name) + info('AGE', d.age) + info('GENDER', d.gender) + info('LANGUAGE', d.language) +
+    info('LOCATION', d.city) + info('MOBILE', d.mobile) + '</div>' +
+   '<hr style="border:0;border-top:1px solid #eadfae;margin:15px 0">' +
+   '<div class="grid">' + info('VENUE', d.venue) + info('DATE', d.programDate) + info('REPORTING', d.reportingTime) + info('PROGRAM', d.programTime) + '</div>' +
+   (ok ? '<div class="notice"><b>Important:</b> Please save this confirmation or take a screenshot. Bring your registration number to the program.</div>' : '') +
+   (!ok && !cancelled ? '<button type="button" class="primary" data-noprint data-action="resumeFromConfirm">Complete Payment →</button>' : '');
+}
+function info(l, v) { return '<div class="info"><small>' + l + '</small><b>' + esc(v) + '</b></div>'; }
+
+async function doLookup() {
+  const n = $('lookupNo').value.trim().toUpperCase(), m = digits10($('lookupMob').value), err = $('lookupError');
+  err.textContent = '';
+  if (!n || !MOBILE_RE.test(m)) { err.textContent = 'Enter a valid registration number and mobile.'; return; }
+  const btn = $('lookupBtn'), label = btn.textContent; btn.disabled = true; btn.textContent = 'Searching...';
+  try {
+    const res = await call('getRegistration', [n, m]);
+    if (!res || res.ok === false) throw new Error((res && res.message) || 'Not found.');
+    state.participant = res; state.regNo = res.registrationNo; state.mobile = m;
+    renderConfirm(res); showScreen('confirmCard', 3);
+  } catch (e) { err.textContent = e.message; }
+  finally { btn.disabled = false; btn.textContent = label; }
+}
+function shareConfirm() {
+  const p = state.participant; if (!p) return;
+  const t = 'Registration Confirmed\nRegistration No: ' + p.registrationNo + '\nName: ' + p.name +
+            '\nVenue: ' + p.venue + '\nDate: ' + p.programDate + '\nReporting: ' + p.reportingTime;
+  if (navigator.share) navigator.share({ title: 'Workshop Registration', text: t }).catch(() => {});
+  else window.open('https://wa.me/?text=' + encodeURIComponent(t), '_blank');
+}
+
+/* ================================ ADMIN ============================ */
+function openAdmin() {
+  showScreen('adminCard');
+  if (state.pin) return;               // already unlocked in this session
+  $('adminLogin').hidden = false; $('dashboard').hidden = true;
+  $('pin').value = ''; $('adminError').textContent = '';
+  setTimeout(() => $('pin').focus(), 100);
+}
+async function adminLogin(pinArg) {
+  const pin = pinArg || $('pin').value.trim(), err = $('adminError'); err.textContent = '';
+  if (!pin) { err.textContent = 'Enter PIN.'; return; }
+  const btn = $('adminLoginBtn'), label = btn.textContent; btn.disabled = true; btn.textContent = 'Loading dashboard...';
+  try {
+    const res = await call('adminDashboard', [pin]);
+    if (!res || res.ok === false) throw new Error((res && res.message) || 'Unable to load dashboard.');
+    state.pin = pin; state.rows = res.rows || [];
+    $('adminLogin').hidden = true; $('dashboard').hidden = false;
+    renderStats(res.stats || {}); renderAdmin();
+  } catch (e) { state.pin = ''; err.textContent = e.message; }
+  finally { btn.disabled = false; btn.textContent = label; }
+}
+function adminRefresh() {
+  $('adminMsg').textContent = 'Refreshing...';
+  adminLogin(state.pin).then(() => { $('adminMsg').textContent = ''; });
+}
+function renderStats(s) {
+  const items = [['Total',s.total],['Confirmed',s.confirmed],['Incomplete',s.incomplete],['Cancelled',s.cancelled],
+    ['Male',s.male],['Female',s.female],['Solapur',s.solapur],['Outside',s.outsideSolapur],
+    ['Urdu',s.urdu],['English',s.english],['Hindi',s.hindi]];
+  $('stats').innerHTML = items.map(x => '<div class="stat"><b>' + (x[1] || 0) + '</b><span>' + x[0] + '</span></div>').join('');
+}
+function safeUrl(u) { return /^https:\/\/(drive|docs)\.google\.com\//.test(u || '') ? u : ''; }
+function renderAdmin() {
+  const q = $('adminSearch').value.toLowerCase().trim();
+  const rows = q ? state.rows.filter(r => [r.registrationNo, r.name, r.mobile, r.city, r.language, r.registrationStatus].join(' ').toLowerCase().includes(q)) : state.rows;
+  $('adminRows').innerHTML = rows.slice().reverse().map(r => {
+    const st = String(r.registrationStatus || '').toUpperCase();
+    const sel = ['CONFIRMED','INCOMPLETE','CANCELLED'].map(o => '<option' + (o === st ? ' selected' : '') + '>' + o + '</option>').join('');
+    const u = safeUrl(r.screenshotUrl);
+    return '<tr><td>' + esc(r.registrationNo) + '</td><td>' + esc(r.name) + '</td><td>' + esc(r.age) + '</td><td>' + esc(r.gender) +
+      '</td><td>' + esc(r.city) + '</td><td>' + esc(r.mobile) + '</td><td>' + esc(r.language) + '</td><td>' + esc(r.paymentStatus) +
+      '</td><td><select class="statusSel" data-reg="' + esc(r.registrationNo) + '">' + sel + '</select></td><td>' +
+      (u ? '<a href="' + esc(u) + '" target="_blank" rel="noopener">Open</a>' : '-') + '</td></tr>';
+  }).join('') || '<tr><td colspan="10">No registrations found.</td></tr>';
+}
+async function onStatusChange(sel) {
+  const reg = sel.dataset.reg, status = sel.value;
+  if (status === 'CANCELLED' && !window.confirm('Cancel registration ' + reg + '?')) { renderAdmin(); return; }
+  $('adminMsg').textContent = 'Saving ' + reg + '...';
+  try {
+    const res = await call('adminUpdate', [state.pin, reg, null, status]);
+    if (!res || res.ok === false) throw new Error((res && res.message) || 'Update failed.');
+    const i = state.rows.findIndex(r => r.registrationNo === reg); if (i >= 0) state.rows[i] = res.row;
+    $('adminMsg').textContent = reg + ' → ' + status; renderAdmin();
+    call('adminDashboard', [state.pin]).then(r => r && r.ok && renderStats(r.stats));
+  } catch (e) { $('adminMsg').textContent = e.message; renderAdmin(); }
+}
+function exportCsv() {
+  const cols = [['Reg No','registrationNo'],['Timestamp','timestamp'],['Name','name'],['Age','age'],['Gender','gender'],['Location','city'],
+    ['Mobile','mobile'],['Language','language'],['Payment Status','paymentStatus'],['Registration Status','registrationStatus'],['Screenshot','screenshotUrl'],['Admin Note','adminNote']];
+  const cell = v => { v = String(v == null ? '' : v); if (/^[=+\-@]/.test(v)) v = "'" + v; return '"' + v.replace(/"/g, '""') + '"'; };
+  const csv = '\ufeff' + [cols.map(c => cell(c[0])).join(',')].concat(state.rows.map(r => cols.map(c => cell(r[c[1]])).join(','))).join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+  a.download = 'workshop_registrations_' + new Date().toISOString().slice(0, 10) + '.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+function adminLogout() {
+  state.pin = ''; state.rows = []; $('pin').value = ''; $('adminError').textContent = '';
+  $('dashboard').hidden = true; $('adminLogin').hidden = false; $('adminSearch').value = '';
+  showScreen('registerCard', 1);
+}
+
+/* ============================ EVENT WIRING ========================= */
+const actions = {
+  register: () => { showScreen('registerCard', 1); },
+  payment: goPayment,
+  lookup: () => showScreen('lookupCard'),
+  admin: openAdmin,
+  copyUpi: copyUpi,
+  submitShot: submitShot,
+  print: () => window.print(),
+  share: shareConfirm,
+  doLookup: doLookup,
+  adminLogin: () => adminLogin(),
+  adminLogout: adminLogout,
+  adminRefresh: adminRefresh,
+  adminExport: exportCsv,
+  resume: goPayment,
+  discardResume: () => { store(null); state.regNo = ''; state.mobile = ''; $('resumeBox').hidden = true; },
+  resumeFromConfirm: goPayment,
+  prefillLookup: t => { $('lookupNo').value = t.dataset.reg || ''; $('lookupMob').value = t.dataset.mob || ''; showScreen('lookupCard'); }
+};
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-action]');
+  if (!t) return;
+  const fn = actions[t.dataset.action];
+  if (fn) { e.preventDefault(); fn(t); }
 });
+$('form').addEventListener('submit', onRegister);
+$('shot').addEventListener('change', onShotChange);
+$('adminSearch').addEventListener('input', renderAdmin);
+$('adminRows').addEventListener('change', e => { if (e.target.classList.contains('statusSel')) onStatusChange(e.target); });
+$('pin').addEventListener('keydown', e => { if (e.key === 'Enter') adminLogin(); });
+$('lookupMob').addEventListener('keydown', e => { if (e.key === 'Enter') doLookup(); });
+['mobile','lookupMob'].forEach(id => $(id).addEventListener('input', e => { e.target.value = e.target.value.replace(/[^\d+ ]/g, ''); }));
 
-function previewShot(e){
- const f=e.target.files[0];$('shotPreview').classList.add('hidden');$('payError').textContent='';
- if(!f)return;
- if(f.size>5*1024*1024){$('payError').textContent='File is larger than 5 MB.';$('shot').value='';return}
- const r=new FileReader();r.onload=()=>{$('shotPreview').src=r.result;$('shotPreview').classList.remove('hidden')};r.readAsDataURL(f);
-}
-function completePayment(){
- const f=$('shot').files[0];$('payError').textContent='';
- if(!f)return $('payError').textContent='Please upload your successful payment screenshot.';
- $('completeBtn').disabled=true;$('completeBtn').textContent='Uploading screenshot...';
- const r=new FileReader();
- r.onload=()=>{
-  server('uploadScreenshot',{registrationNo:regNo,mobile:participant.mobile,fileData:{name:f.name,type:f.type,data:r.result}},res=>{
-   $('completeBtn').disabled=false;$('completeBtn').textContent='Submit Screenshot & Confirm Registration';
-   if(!res||res.ok===false)return $('payError').textContent=res?.message||'Upload failed.';
-   participant=res;hide('paymentCard');show('confirmCard');steps(3);renderConfirm(res);top();
-  },e=>{$('completeBtn').disabled=false;$('completeBtn').textContent='Submit Screenshot & Confirm Registration';$('payError').textContent=err(e)});
- };r.readAsDataURL(f);
-}
-function renderConfirm(d){
- $('confirmation').innerHTML=`<div style="text-align:center"><div class="muted">REGISTRATION CONFIRMED</div><div class="reg">${clean(d.registrationNo)}</div><div style="font-weight:900;color:#16734f">✓ Payment Screenshot Received</div></div>
- <div class="infoGrid" style="margin-top:13px"><div class="info"><small>NAME</small><b>${clean(d.name)}</b></div><div class="info"><small>AGE</small><b>${clean(d.age)}</b></div><div class="info"><small>GENDER</small><b>${clean(d.gender)}</b></div><div class="info"><small>LANGUAGE</small><b>${clean(d.language)}</b></div><div class="info"><small>CITY</small><b>${clean(d.city)}</b></div><div class="info"><small>MOBILE</small><b>${clean(d.mobile)}</b></div></div>
- <hr style="border:0;border-top:1px solid #eadfae;margin:15px 0"><div class="infoGrid"><div class="info"><small>VENUE</small><b>${clean(d.venue)}</b></div><div class="info"><small>DATE</small><b>${clean(d.programDate)}</b></div><div class="info"><small>REPORTING</small><b>${clean(d.reportingTime)}</b></div><div class="info"><small>PROGRAM</small><b>9:30 AM to Isha</b></div></div>
- <div class="notice"><b>Important:</b> Please save this confirmation or take a screenshot. Bring your registration number to the program.</div>`;
-}
-function backToRegistration(){hide('paymentCard');show('registerCard');steps(1);top()}
-function goHome(){hide('paymentCard');hide('confirmCard');hide('lookupCard');hide('adminCard');show('registerCard');steps(1);top()}
-function showLookup(){hide('registerCard');hide('paymentCard');hide('confirmCard');hide('adminCard');show('lookupCard');top()}
-function lookup(){
- const n=$('lookupNo').value.trim(),m=$('lookupMob').value.trim();$('lookupError').textContent='';
- if(!n||!/^[6-9]\d{9}$/.test(m))return $('lookupError').textContent='Enter valid registration number and mobile.';
- const ok=res=>{if(!res||res.ok===false)return $('lookupError').textContent=res?.message||'Not found.';participant=res;regNo=res.registrationNo;hide('lookupCard');show('confirmCard');steps(3);renderConfirm(res);top()};
- const bad=e=>$('lookupError').textContent=err(e);
- if(BACKEND_URL)apiGet('lookup',{registrationNo:n,mobile:m}).then(ok).catch(bad);else server('lookup',{registrationNo:n,mobile:m},ok,bad);
-}
-function shareConfirm(){
- const t=`Registration Confirmed\\nRegistration No: ${participant.registrationNo}\\nName: ${participant.name}\\nVenue: ${participant.venue}\\nDate: ${participant.programDate}\\nReporting: ${participant.reportingTime}`;
- if(navigator.share)navigator.share({title:'Workshop Registration',text:t});else window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
-}
-function openAdmin(){hide('registerCard');hide('paymentCard');hide('confirmCard');hide('lookupCard');show('adminCard');$('adminLogin').classList.remove('hidden');$('dashboard').classList.add('hidden');top()}
-function loginAdmin(){
- const p=$('pin').value.trim();$('adminError').textContent='';
- if(p!=='3249')return $('adminError').textContent='Invalid PIN.';
- adminPin=p;loadAdmin();
-}
-function loadAdmin(){
- const good=(s,l)=>{
-  if(s?.ok===false)return $('adminError').textContent=s.message||'Unable to load dashboard.';
-  adminData=l.rows||[];$('adminLogin').classList.add('hidden');$('dashboard').classList.remove('hidden');
-  $('stats').innerHTML=[['Total',s.total],['Confirmed',s.confirmed],['Male',s.male],['Female',s.female],['Solapur',s.solapur],['Outside',s.outsideSolapur],['Urdu',s.urdu],['English',s.english],['Hindi',s.hindi]].map(x=>`<div class="stat"><b>${x[1]}</b><span>${x[0]}</span></div>`).join('');
-  renderAdmin(adminData);
- };
- const bad=e=>$('adminError').textContent=err(e);
- if(BACKEND_URL)Promise.all([apiGet('adminStats',{pin:adminPin}),apiGet('adminList',{pin:adminPin})]).then(x=>good(x[0],x[1])).catch(bad);
- else{
-  google.script.run.withSuccessHandler(s=>google.script.run.withSuccessHandler(l=>good(s,l)).withFailureHandler(bad).adminList(adminPin)).withFailureHandler(bad).adminStats(adminPin);
- }
-}
-function renderAdmin(rows){
- $('adminRows').innerHTML=rows.map(r=>`<tr><td>${clean(r.registrationNo)}</td><td>${clean(r.name)}</td><td>${clean(r.age)}</td><td>${clean(r.gender)}</td><td>${clean(r.city)}</td><td>${clean(r.mobile)}</td><td>${clean(r.language)}</td><td>${clean(r.paymentStatus)}</td><td>${clean(r.registrationStatus)}</td><td>${r.screenshotUrl?`<a href="${clean(r.screenshotUrl)}" target="_blank">Open</a>`:'-'}</td></tr>`).join('');
-}
-function filterAdmin(){const q=$('adminSearch').value.toLowerCase();renderAdmin(adminData.filter(r=>[r.registrationNo,r.name,r.mobile,r.city,r.language].join(' ').toLowerCase().includes(q)))}
-function logoutAdmin(){adminPin='';adminData=[];$('pin').value='';$('adminError').textContent='';$('dashboard').classList.add('hidden');$('adminLogin').classList.remove('hidden');goHome()}
-</script>
-
-<script>
-function hide(id){document.getElementById(id)?.classList.remove('active');}
-function show(id){document.getElementById(id)?.classList.add('active');}
-function top(){window.scrollTo(0,0);}
-function backToRegistration(){showScreen('registerCard',1);}
-function goHome(){showScreen('registerCard',1);}
-function showLookup(){showScreen('lookupCard',3);}
-function openAdmin(){showScreen('adminCard');document.getElementById('adminLogin').style.display='block';document.getElementById('dashboard').style.display='none';}
-</script>
-<script>
-/* FINAL MOBILE NAVIGATION / ADMIN FIX */
-(function(){
-  window.openAdmin = function(){
-    var ids=['registerCard','paymentCard','confirmCard','lookupCard','adminCard'];
-    ids.forEach(function(id){
-      var el=document.getElementById(id);
-      if(el) el.classList.remove('active');
-    });
-    var admin=document.getElementById('adminCard');
-    if(admin) admin.classList.add('active');
-
-    var login=document.getElementById('adminLogin');
-    var dash=document.getElementById('dashboard');
-    if(login) login.style.display='block';
-    if(dash) dash.style.display='none';
-
-    var pin=document.getElementById('pin');
-    if(pin){ pin.value=''; setTimeout(function(){pin.focus();},100); }
-
-    ['navReg','navPay','navLookup','navAdmin'].forEach(function(x){
-      var b=document.getElementById(x);
-      if(b) b.classList.remove('active');
-    });
-    var nb=document.getElementById('navAdmin');
-    if(nb) nb.classList.add('active');
-
-    window.scrollTo(0,0);
-  };
-
-  window.loginAdmin = function(){
-    var pinEl=document.getElementById('pin');
-    var error=document.getElementById('adminError');
-    var pin=(pinEl ? pinEl.value : '').trim();
-    if(error) error.textContent='';
-
-    if(pin !== '3249'){
-      if(error) error.textContent='Invalid PIN.';
-      return;
-    }
-
-    window.adminPin=pin;
-
-    if(typeof google === 'undefined' || !google.script || !google.script.run){
-      if(error) error.textContent='Google Apps Script connection is unavailable. Open the deployed /exec URL.';
-      return;
-    }
-
-    var btn=document.querySelector('#adminLogin button');
-    if(btn){btn.disabled=true;btn.textContent='Loading dashboard...';}
-
-    google.script.run
-      .withSuccessHandler(function(stats){
-        google.script.run
-          .withSuccessHandler(function(list){
-            if(btn){btn.disabled=false;btn.textContent='Unlock Dashboard';}
-            if(stats && stats.ok===false){
-              if(error) error.textContent=stats.message||'Unable to load dashboard.';
-              return;
-            }
-            if(list && list.ok===false){
-              if(error) error.textContent=list.message||'Unable to load registrations.';
-              return;
-            }
-
-            var login=document.getElementById('adminLogin');
-            var dash=document.getElementById('dashboard');
-            if(login) login.style.display='none';
-            if(dash) dash.style.display='block';
-
-            var rows=(list && list.rows)||[];
-            window.adminData=rows;
-
-            var s=stats||{};
-            var statEl=document.getElementById('stats');
-            if(statEl){
-              var items=[
-                ['Total',s.total||0],['Confirmed',s.confirmed||0],
-                ['Male',s.male||0],['Female',s.female||0],
-                ['Solapur',s.solapur||0],['Outside',s.outsideSolapur||0],
-                ['Urdu',s.urdu||0],['English',s.english||0],['Hindi',s.hindi||0]
-              ];
-              statEl.innerHTML=items.map(function(x){
-                return '<div class="stat"><b>'+x[1]+'</b><span>'+x[0]+'</span></div>';
-              }).join('');
-            }
-            if(typeof renderAdmin==='function') renderAdmin(rows);
-            window.scrollTo(0,0);
-          })
-          .withFailureHandler(function(e){
-            if(btn){btn.disabled=false;btn.textContent='Unlock Dashboard';}
-            if(error) error.textContent=(e && e.message)||String(e||'Unable to load registrations.');
-          })
-          .adminList(pin);
-      })
-      .withFailureHandler(function(e){
-        if(btn){btn.disabled=false;btn.textContent='Unlock Dashboard';}
-        if(error) error.textContent=(e && e.message)||String(e||'Unable to load dashboard.');
-      })
-      .adminStats(pin);
-  };
-
-  window.logoutAdmin = function(){
-    window.adminPin='';
-    window.adminData=[];
-    var dash=document.getElementById('dashboard');
-    var login=document.getElementById('adminLogin');
-    if(dash) dash.style.display='none';
-    if(login) login.style.display='block';
-    var pin=document.getElementById('pin');
-    if(pin) pin.value='';
-    var error=document.getElementById('adminError');
-    if(error) error.textContent='';
-    if(typeof showScreen==='function') showScreen('registerCard',1);
-    else {
-      document.querySelectorAll('.screen').forEach(function(x){x.classList.remove('active');});
-      document.getElementById('registerCard').classList.add('active');
-    }
-  };
+checkPending();
 })();
 </script>
-</body></html>
+</body>
+</html>
