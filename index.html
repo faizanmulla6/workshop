@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#063f45">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Ek Rozah Tarbiyati Workshop</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;width:100%;min-height:100%;background:#f4f7f6;color:#183238;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+body{font-size:16px;overflow-x:hidden}
+button,input,select{font:inherit}input,select{font-size:16px}
+button{border:0}
+#app{width:100%;min-height:100dvh;padding-bottom:88px}
+.header{background:#063f45;color:#fff;padding:calc(14px + env(safe-area-inset-top)) 16px 18px;border-radius:0 0 22px 22px}
+.headerRow{display:flex;justify-content:space-between;align-items:center}
+.brand{font-size:10px;letter-spacing:1px;font-weight:800;opacity:.85}
+.adminTop{color:#fff;background:#ffffff18;border:1px solid #ffffff55;border-radius:20px;padding:8px 11px;font-size:11px;font-weight:800}
+h1{font-size:27px;line-height:1.08;margin:15px 0 5px;letter-spacing:-.6px}
+.subtitle{color:#f4d277;font-size:15px;font-weight:800}
+.eventChip{display:inline-block;margin-top:12px;padding:7px 10px;border-radius:20px;background:#ffffff12;border:1px solid #ffffff2b;font-size:11px}
+.content{padding:12px 12px 0}
+.screen{display:none}.screen.active{display:block}
+.card{background:#fff;border:1px solid #e3ebe8;border-radius:17px;padding:16px;margin-bottom:12px;box-shadow:0 3px 16px #1832380b}
+.steps{position:sticky;top:0;z-index:5;background:#f4f7f6;padding:9px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.step{background:#e4ece9;color:#718084;text-align:center;font-size:10px;font-weight:900;padding:8px 2px;border-radius:9px}.step.active{background:#063f45;color:#fff}
+.title{font-size:20px;font-weight:900;margin:0}.sub{font-size:12px;color:#718084;margin-top:3px}
+.notice{background:#fff8df;border:1px solid #efd98c;border-radius:12px;padding:12px;font-size:13px;line-height:1.5;margin:13px 0}
+.field{margin-top:13px}.field label{display:block;font-size:11px;font-weight:900;color:#4b5c60;margin-bottom:6px}
+.field input,.field select{width:100%;height:50px;border:1px solid #d4e0dd;border-radius:12px;background:#fff;padding:0 13px;outline:none;color:#183238}
+.field input:focus,.field select:focus{border-color:#063f45;box-shadow:0 0 0 3px #063f4514}
+.primary,.secondary,.gold{width:100%;min-height:52px;border-radius:13px;margin-top:14px;font-weight:900}.primary{background:#063f45;color:#fff}.secondary{background:#edf3f1;color:#063f45}.gold{background:#d8ad48;color:#17363a}
+.error{color:#a92e2e;font-size:12px;font-weight:800;margin-top:8px}.muted{color:#718084;font-size:12px}
+.paymentBox{text-align:center;background:#f3faf7;border:1px solid #d9eae4;border-radius:15px;padding:15px}
+.amount{font-size:38px;font-weight:950;color:#063f45}.upi{font-size:17px;font-weight:900;color:#063f45;margin:5px 0;word-break:break-word}
+.paygrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.paybtn{min-height:49px;border:1px solid #d4e2de;border-radius:12px;background:#fff;color:#063f45;font-weight:900}
+.qr{margin:13px auto 0;width:min(220px,70vw);height:min(220px,70vw);display:flex;align-items:center;justify-content:center;background:#fff;border-radius:12px}
+.qr img{max-width:100%;max-height:100%}
+.upload{border:2px dashed #b7c9c4;border-radius:14px;padding:14px;text-align:center;margin-top:12px;background:#fafcfb}
+.upload input{width:100%;margin-top:9px}
+.preview{width:100%;max-height:220px;object-fit:contain;border-radius:10px;margin-top:9px}
+.confirm{border:2px solid #d8ad48;background:#fffdf4;border-radius:17px;padding:16px}.reg{text-align:center;font-size:30px;font-weight:950;color:#063f45;margin:8px 0 13px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.info{background:#f4f7f6;border-radius:10px;padding:10px}.info small{display:block;color:#718084;font-size:9px;font-weight:800}.info b{font-size:12px}
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#063f45;padding:7px 6px calc(7px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,1fr);box-shadow:0 -5px 20px #0002}
+.bottom button{background:transparent;color:#fff;font-size:10px;font-weight:900;padding:7px 2px;border-radius:9px}.bottom button.active{background:#ffffff18}
+.adminHead{display:flex;justify-content:space-between;align-items:center}.logout{background:#feecec;color:#a92e2e;padding:8px 10px;border-radius:9px;font-weight:900;font-size:11px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-top:12px}.stat{background:#f4f7f6;border-radius:10px;text-align:center;padding:9px}.stat b{display:block;font-size:21px;color:#063f45}.stat span{font-size:10px;color:#718084;font-weight:800}
+.tableWrap{width:100%;overflow-x:auto;border:1px solid #e1e9e6;border-radius:10px;margin-top:10px}table{border-collapse:collapse;min-width:800px;width:800px}th,td{font-size:10px;padding:8px;border-bottom:1px solid #e1e9e6;text-align:left}th{background:#063f45;color:#fff}
+.footer{text-align:center;color:#718084;font-size:10px;padding:15px 8px}
+@media(min-width:700px){body:before{content:"Mobile version";display:block;text-align:center;padding:10px;background:#063f45;color:white;font-size:12px}}
+@media(max-width:350px){h1{font-size:24px}.grid{grid-template-columns:1fr}.paygrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="app">
+<header class="header">
+ <div class="headerRow"><div class="brand">EK ROZAH TARBIYATI WORKSHOP</div><button type="button" class="adminTop" onclick="openAdmin()">🔒 ADMIN</button></div>
+ <h1>Tahaffuz-e-Aqeedah<br>Wa Manhaj</h1>
+ <div class="subtitle">Registration Portal</div>
+ <div class="eventChip">18 October 2026 • Sunday • ₹50</div>
+</header>
+
+<main class="content">
+<div class="steps"><div class="step active" id="st1">1 REGISTRATION</div><div class="step" id="st2">2 PAYMENT</div><div class="step" id="st3">3 CONFIRM</div></div>
+
+<section id="registerCard" class="screen active">
+<div class="card">
+ <div class="title">Participant Registration</div><div class="sub">For men and women above 15 years</div>
+ <div class="notice"><b>Registration fee: ₹50</b><br>Last registration date: <b>16 October 2026</b></div>
+ <form id="form">
+  <div class="field"><label>FULL NAME *</label><input id="name" required autocomplete="name" placeholder="Enter your full name"></div>
+  <div class="field"><label>AGE *</label><input id="age" type="number" min="16" max="120" required placeholder="Enter age"></div>
+  <div class="field"><label>GENDER *</label><select id="gender" required><option value="">Select gender</option><option>Male</option><option>Female</option></select></div>
+  <div class="field"><label>LOCATION *</label><select id="city" required><option value="">Select location</option><option>Solapur</option><option>Outside solapur</option></select></div>
+  <div class="field"><label>MOBILE NUMBER *</label><input id="mobile" inputmode="numeric" autocomplete="tel" maxlength="10" required placeholder="10-digit mobile number"></div>
+  <div class="field"><label>LANGUAGE *</label><select id="language" required><option value="">Select language</option><option>Urdu</option><option>English</option><option>Hindi</option></select></div>
+  <div id="formError" class="error"></div>
+  <button class="primary" id="continueBtn" type="submit">Continue to Payment ₹50 →</button>
+ </form>
+</div>
+<div class="card"><div class="title">Program Details</div><div class="grid" style="margin-top:12px">
+<div class="info"><small>VENUE</small><b>Masjid-e-Umar Khalifa</b></div><div class="info"><small>DATE</small><b>18 October 2026</b></div><div class="info"><small>ADDRESS</small><b>Sumaiyya Nagar, Nai Zindagi, Solapur</b></div><div class="info"><small>TIME</small><b>9:30 AM to Isha</b></div></div></div>
+</section>
+
+<section id="paymentCard" class="screen">
+<div class="card">
+ <div class="title">Complete Payment</div><div class="sub">Registration No: <b id="payReg">Not generated yet</b></div>
+ <div class="paymentBox" style="margin-top:13px"><div class="muted">PAYMENT AMOUNT</div><div class="amount">₹50</div><div class="upi">faizanmulla6@ybl</div><div class="muted">UPI ID</div>
+  <div class="paygrid"><button class="paybtn" onclick="payUPI('gpay')">Google Pay</button><button class="paybtn" onclick="payUPI('phonepe')">PhonePe</button><button class="paybtn" onclick="payUPI('paytm')">Paytm</button><button class="paybtn" onclick="payUPI('other')">Other UPI</button></div>
+  <button class="secondary" onclick="copyUPI()">📋 Copy UPI ID</button>
+  <div class="qr" id="qr"></div><div class="muted">Scan with any UPI app</div>
+ </div>
+ <div class="notice"><b>After payment:</b> Upload a screenshot showing the successful payment. UTR entry is not required.</div>
+ <div class="upload"><b>📸 Payment Screenshot *</b><div class="muted">JPG / PNG / WEBP • Maximum 5 MB</div><input id="shot" type="file" accept="image/jpeg,image/png,image/webp" onchange="previewShot(event)"><img id="shotPreview" class="preview" style="display:none"></div>
+ <div id="payError" class="error"></div>
+ <button class="primary" id="completeBtn" onclick="completePayment()">Submit Screenshot & Confirm</button>
+ <button class="secondary" onclick="showScreen('registerCard',1)">← Back to Registration</button>
+</div>
+</section>
+
+<section id="confirmCard" class="screen">
+<div class="card"><div id="confirmation" class="confirm"></div><button class="gold" onclick="window.print()">📄 Save / Print PDF</button><button class="secondary" onclick="shareConfirm()">📤 Share Confirmation</button></div>
+</section>
+
+<section id="lookupCard" class="screen">
+<div class="card"><div class="title">My Registration</div><div class="sub">Find your confirmation using registration number + mobile.</div>
+<div class="field"><label>REGISTRATION NUMBER</label><input id="lookupNo" placeholder="TRW-000001"></div>
+<div class="field"><label>MOBILE NUMBER</label><input id="lookupMob" inputmode="numeric" maxlength="10" placeholder="10-digit mobile"></div>
+<div id="lookupError" class="error"></div><button class="primary" onclick="lookup()">Find Registration</button></div>
+</section>
+
+<section id="adminCard" class="screen">
+<div class="card">
+<div class="adminHead"><div><div class="title">Admin Dashboard</div><div class="sub">Protected management panel</div></div><button class="logout" onclick="logoutAdmin()">Logout</button></div>
+<div id="adminLogin"><div class="field"><label>ADMIN PIN</label><input id="pin" type="password" inputmode="numeric" maxlength="4" placeholder="Enter PIN"></div><div id="adminError" class="error"></div><button class="primary" onclick="loginAdmin()">Unlock Dashboard</button></div>
+<div id="dashboard" style="display:none"><div class="stats" id="stats"></div><div class="field"><input id="adminSearch" placeholder="Search name / mobile / registration..." oninput="filterAdmin()"></div><button class="secondary" onclick="loadAdmin()">↻ Refresh</button><div class="tableWrap"><table><thead><tr><th>Reg No</th><th>Name</th><th>Age</th><th>Gender</th><th>City</th><th>Mobile</th><th>Language</th><th>Payment</th><th>Status</th><th>Screenshot</th></tr></thead><tbody id="adminRows"></tbody></table></div></div>
+</div>
+</section>
+</main>
+
+<nav class="bottom">
+<button id="navReg" class="active" onclick="showScreen('registerCard',1)">📝<br>Register</button>
+<button id="navPay" onclick="showPaymentNav()">💳<br>Payment</button>
+<button id="navLookup" onclick="showScreen('lookupCard',3)">🔎<br>My Registration</button>
+<button type="button" id="navAdmin" onclick="openAdmin()">🔒<br>Admin</button>
+</nav>
+<div class="footer">ZILAYI JAMIAT AHLE HADEES, SOLAPUR<br>70284 88819 • 99608 05017</div>
+</div>
+<script>
+function showScreen(id,step){
+ document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ if(step) steps(step);
+ ['navReg','navPay','navLookup','navAdmin'].forEach(x=>document.getElementById(x)?.classList.remove('active'));
+ const map={registerCard:'navReg',paymentCard:'navPay',lookupCard:'navLookup',adminCard:'navAdmin',confirmCard:'navLookup'};
+ document.getElementById(map[id])?.classList.add('active');
+ window.scrollTo(0,0);
+}
+function showPaymentNav(){
+ showScreen('paymentCard',2);
+ if(typeof makeQR==='function') makeQR();
+}
+</script>
+<script>
+// ===================== BACKEND =====================
+// For Netlify/Vercel: paste the Apps Script Web App URL here.
+// Example:
+// const BACKEND_URL='https://script.google.com/macros/s/XXXX/exec';
+const BACKEND_URL='';
+const UPI='faizanmulla6@ybl', AMOUNT='50', PAYEE='Ek Rozah Tarbiyati Workshop';
+let regNo='',participant={},adminPin='',adminData=[];
+
+const $=id=>document.getElementById(id);
+const hide=id=>$(id).classList.add('hidden');
+const show=id=>$(id).classList.remove('hidden');
+const clean=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function err(e){return e?.message||String(e||'Something went wrong');}
+function top(){window.scrollTo({top:0,behavior:'smooth'})}
+function steps(n){['st1','st2','st3'].forEach((x,i)=>$(x).classList.toggle('active',i<n));}
+
+// A robust UPI intent strategy.
+// `upi://pay` is used for UPI apps; browser-specific intent URLs are not reliable.
+// We offer app-specific intent URLs where supported and always provide QR + copy fallback.
+function upiUrl(){
+ return 'upi://pay?pa='+encodeURIComponent(UPI)+'&pn='+encodeURIComponent(PAYEE)+'&am='+encodeURIComponent(AMOUNT)+'&cu=INR';
+}
+function payUPI(app){
+ const u=upiUrl();
+ // App-specific intent URI. If a browser doesn't launch it, the visible fallback remains.
+ const urls={
+   gpay:'tez://upi/pay?pa='+encodeURIComponent(UPI)+'&pn='+encodeURIComponent(PAYEE)+'&am='+AMOUNT+'&cu=INR',
+   phonepe:'phonepe://pay?pa='+encodeURIComponent(UPI)+'&pn='+encodeURIComponent(PAYEE)+'&am='+AMOUNT+'&cu=INR',
+   paytm:'paytmmp://pay?pa='+encodeURIComponent(UPI)+'&pn='+encodeURIComponent(PAYEE)+'&am='+AMOUNT+'&cu=INR',
+   other:u
+ };
+ const target=urls[app]||u;
+ window.location.href=target;
+ setTimeout(()=>{ if(!document.hidden) alert('If the UPI app did not open, tap “Copy UPI ID” and pay ₹50 in your UPI app, or scan the QR code.'); },1200);
+}
+function copyUPI(){
+ if(navigator.clipboard) navigator.clipboard.writeText(UPI).then(()=>alert('UPI ID copied: '+UPI));
+ else prompt('Copy UPI ID',UPI);
+}
+function makeQR(){
+ const text=upiUrl();
+ // Google Chart is avoided. Generate a QR through a public QR image endpoint for display.
+ $('qr').innerHTML='<img alt="UPI QR Code" src="https://quickchart.io/qr?size=220&text='+encodeURIComponent(text)+'">';
+}
+
+async function apiGet(action,data={}){
+ const q=new URLSearchParams({api:'1',action,...data});
+ const r=await fetch(BACKEND_URL+'?'+q.toString(),{cache:'no-store'});
+ return r.json();
+}
+async function apiPost(action,data={}){
+ const r=await fetch(BACKEND_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,...data})});
+ return r.json();
+}
+function server(method,args,ok,bad){
+ if(BACKEND_URL){
+   const fn=method==='register'?()=>apiPost('register',{data:args.data}):()=>apiPost('uploadScreenshot',args);
+   fn().then(ok).catch(bad);
+ }else{
+   const r=google.script.run.withSuccessHandler(ok).withFailureHandler(bad);
+   if(method==='register')r.submitRegistration(args.data);
+   else if(method==='uploadScreenshot')r.uploadPaymentScreenshot(args.registrationNo,args.mobile,args.fileData);
+   else if(method==='lookup')r.getRegistration(args.registrationNo,args.mobile);
+   else if(method==='stats')r.adminStats(args.pin);
+   else if(method==='list')r.adminList(args.pin);
+ }
+}
+
+$('form').addEventListener('submit',e=>{
+ e.preventDefault();$('formError').textContent='';
+ participant={name:$('name').value.trim(),age:$('age').value,gender:$('gender').value,city:$('city').value,mobile:$('mobile').value.trim(),language:$('language').value};
+ if(!participant.name)return $('formError').textContent='Enter your name.';
+ if(Number(participant.age)<16)return $('formError').textContent='Registration is for persons above 15 years.';
+ if(!/^[6-9]\\d{9}$/.test(participant.mobile))return $('formError').textContent='Enter a valid 10-digit mobile number.';
+ if(!participant.gender||!participant.city||!participant.language)return $('formError').textContent='Please select all required fields.';
+ $('continueBtn').disabled=true;$('continueBtn').textContent='Creating registration...';
+ server('register',{data:participant},res=>{
+  $('continueBtn').disabled=false;$('continueBtn').textContent='Continue → Payment ₹50';
+  if(!res.ok)return $('formError').textContent=res.message||'Registration failed.';
+  regNo=res.registrationNo;$('payReg').textContent=regNo;
+  hide('registerCard');show('paymentCard');steps(2);makeQR();top();
+ },e=>{$('continueBtn').disabled=false;$('continueBtn').textContent='Continue → Payment ₹50';$('formError').textContent=err(e)});
+});
+
+function previewShot(e){
+ const f=e.target.files[0];$('shotPreview').classList.add('hidden');$('payError').textContent='';
+ if(!f)return;
+ if(f.size>5*1024*1024){$('payError').textContent='File is larger than 5 MB.';$('shot').value='';return}
+ const r=new FileReader();r.onload=()=>{$('shotPreview').src=r.result;$('shotPreview').classList.remove('hidden')};r.readAsDataURL(f);
+}
+function completePayment(){
+ const f=$('shot').files[0];$('payError').textContent='';
+ if(!f)return $('payError').textContent='Please upload your successful payment screenshot.';
+ $('completeBtn').disabled=true;$('completeBtn').textContent='Uploading screenshot...';
+ const r=new FileReader();
+ r.onload=()=>{
+  server('uploadScreenshot',{registrationNo:regNo,mobile:participant.mobile,fileData:{name:f.name,type:f.type,data:r.result}},res=>{
+   $('completeBtn').disabled=false;$('completeBtn').textContent='Submit Screenshot & Confirm Registration';
+   if(!res||res.ok===false)return $('payError').textContent=res?.message||'Upload failed.';
+   participant=res;hide('paymentCard');show('confirmCard');steps(3);renderConfirm(res);top();
+  },e=>{$('completeBtn').disabled=false;$('completeBtn').textContent='Submit Screenshot & Confirm Registration';$('payError').textContent=err(e)});
+ };r.readAsDataURL(f);
+}
+function renderConfirm(d){
+ $('confirmation').innerHTML=`<div style="text-align:center"><div class="muted">REGISTRATION CONFIRMED</div><div class="reg">${clean(d.registrationNo)}</div><div style="font-weight:900;color:#16734f">✓ Payment Screenshot Received</div></div>
+ <div class="infoGrid" style="margin-top:13px"><div class="info"><small>NAME</small><b>${clean(d.name)}</b></div><div class="info"><small>AGE</small><b>${clean(d.age)}</b></div><div class="info"><small>GENDER</small><b>${clean(d.gender)}</b></div><div class="info"><small>LANGUAGE</small><b>${clean(d.language)}</b></div><div class="info"><small>CITY</small><b>${clean(d.city)}</b></div><div class="info"><small>MOBILE</small><b>${clean(d.mobile)}</b></div></div>
+ <hr style="border:0;border-top:1px solid #eadfae;margin:15px 0"><div class="infoGrid"><div class="info"><small>VENUE</small><b>${clean(d.venue)}</b></div><div class="info"><small>DATE</small><b>${clean(d.programDate)}</b></div><div class="info"><small>REPORTING</small><b>${clean(d.reportingTime)}</b></div><div class="info"><small>PROGRAM</small><b>9:30 AM to Isha</b></div></div>
+ <div class="notice"><b>Important:</b> Please save this confirmation or take a screenshot. Bring your registration number to the program.</div>`;
+}
+function backToRegistration(){hide('paymentCard');show('registerCard');steps(1);top()}
+function goHome(){hide('paymentCard');hide('confirmCard');hide('lookupCard');hide('adminCard');show('registerCard');steps(1);top()}
+function showLookup(){hide('registerCard');hide('paymentCard');hide('confirmCard');hide('adminCard');show('lookupCard');top()}
+function lookup(){
+ const n=$('lookupNo').value.trim(),m=$('lookupMob').value.trim();$('lookupError').textContent='';
+ if(!n||!/^[6-9]\d{9}$/.test(m))return $('lookupError').textContent='Enter valid registration number and mobile.';
+ const ok=res=>{if(!res||res.ok===false)return $('lookupError').textContent=res?.message||'Not found.';participant=res;regNo=res.registrationNo;hide('lookupCard');show('confirmCard');steps(3);renderConfirm(res);top()};
+ const bad=e=>$('lookupError').textContent=err(e);
+ if(BACKEND_URL)apiGet('lookup',{registrationNo:n,mobile:m}).then(ok).catch(bad);else server('lookup',{registrationNo:n,mobile:m},ok,bad);
+}
+function shareConfirm(){
+ const t=`Registration Confirmed\\nRegistration No: ${participant.registrationNo}\\nName: ${participant.name}\\nVenue: ${participant.venue}\\nDate: ${participant.programDate}\\nReporting: ${participant.reportingTime}`;
+ if(navigator.share)navigator.share({title:'Workshop Registration',text:t});else window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
+}
+function openAdmin(){hide('registerCard');hide('paymentCard');hide('confirmCard');hide('lookupCard');show('adminCard');$('adminLogin').classList.remove('hidden');$('dashboard').classList.add('hidden');top()}
+function loginAdmin(){
+ const p=$('pin').value.trim();$('adminError').textContent='';
+ if(p!=='3249')return $('adminError').textContent='Invalid PIN.';
+ adminPin=p;loadAdmin();
+}
+function loadAdmin(){
+ const good=(s,l)=>{
+  if(s?.ok===false)return $('adminError').textContent=s.message||'Unable to load dashboard.';
+  adminData=l.rows||[];$('adminLogin').classList.add('hidden');$('dashboard').classList.remove('hidden');
+  $('stats').innerHTML=[['Total',s.total],['Confirmed',s.confirmed],['Male',s.male],['Female',s.female],['Solapur',s.solapur],['Outside',s.outsideSolapur],['Urdu',s.urdu],['English',s.english],['Hindi',s.hindi]].map(x=>`<div class="stat"><b>${x[1]}</b><span>${x[0]}</span></div>`).join('');
+  renderAdmin(adminData);
+ };
+ const bad=e=>$('adminError').textContent=err(e);
+ if(BACKEND_URL)Promise.all([apiGet('adminStats',{pin:adminPin}),apiGet('adminList',{pin:adminPin})]).then(x=>good(x[0],x[1])).catch(bad);
+ else{
+  google.script.run.withSuccessHandler(s=>google.script.run.withSuccessHandler(l=>good(s,l)).withFailureHandler(bad).adminList(adminPin)).withFailureHandler(bad).adminStats(adminPin);
+ }
+}
+function renderAdmin(rows){
+ $('adminRows').innerHTML=rows.map(r=>`<tr><td>${clean(r.registrationNo)}</td><td>${clean(r.name)}</td><td>${clean(r.age)}</td><td>${clean(r.gender)}</td><td>${clean(r.city)}</td><td>${clean(r.mobile)}</td><td>${clean(r.language)}</td><td>${clean(r.paymentStatus)}</td><td>${clean(r.registrationStatus)}</td><td>${r.screenshotUrl?`<a href="${clean(r.screenshotUrl)}" target="_blank">Open</a>`:'-'}</td></tr>`).join('');
+}
+function filterAdmin(){const q=$('adminSearch').value.toLowerCase();renderAdmin(adminData.filter(r=>[r.registrationNo,r.name,r.mobile,r.city,r.language].join(' ').toLowerCase().includes(q)))}
+function logoutAdmin(){adminPin='';adminData=[];$('pin').value='';$('adminError').textContent='';$('dashboard').classList.add('hidden');$('adminLogin').classList.remove('hidden');goHome()}
+</script>
+
+<script>
+function hide(id){document.getElementById(id)?.classList.remove('active');}
+function show(id){document.getElementById(id)?.classList.add('active');}
+function top(){window.scrollTo(0,0);}
+function backToRegistration(){showScreen('registerCard',1);}
+function goHome(){showScreen('registerCard',1);}
+function showLookup(){showScreen('lookupCard',3);}
+function openAdmin(){showScreen('adminCard');document.getElementById('adminLogin').style.display='block';document.getElementById('dashboard').style.display='none';}
+</script>
+<script>
+/* FINAL MOBILE NAVIGATION / ADMIN FIX */
+(function(){
+  window.openAdmin = function(){
+    var ids=['registerCard','paymentCard','confirmCard','lookupCard','adminCard'];
+    ids.forEach(function(id){
+      var el=document.getElementById(id);
+      if(el) el.classList.remove('active');
+    });
+    var admin=document.getElementById('adminCard');
+    if(admin) admin.classList.add('active');
+
+    var login=document.getElementById('adminLogin');
+    var dash=document.getElementById('dashboard');
+    if(login) login.style.display='block';
+    if(dash) dash.style.display='none';
+
+    var pin=document.getElementById('pin');
+    if(pin){ pin.value=''; setTimeout(function(){pin.focus();},100); }
+
+    ['navReg','navPay','navLookup','navAdmin'].forEach(function(x){
+      var b=document.getElementById(x);
+      if(b) b.classList.remove('active');
+    });
+    var nb=document.getElementById('navAdmin');
+    if(nb) nb.classList.add('active');
+
+    window.scrollTo(0,0);
+  };
+
+  window.loginAdmin = function(){
+    var pinEl=document.getElementById('pin');
+    var error=document.getElementById('adminError');
+    var pin=(pinEl ? pinEl.value : '').trim();
+    if(error) error.textContent='';
+
+    if(pin !== '3249'){
+      if(error) error.textContent='Invalid PIN.';
+      return;
+    }
+
+    window.adminPin=pin;
+
+    if(typeof google === 'undefined' || !google.script || !google.script.run){
+      if(error) error.textContent='Google Apps Script connection is unavailable. Open the deployed /exec URL.';
+      return;
+    }
+
+    var btn=document.querySelector('#adminLogin button');
+    if(btn){btn.disabled=true;btn.textContent='Loading dashboard...';}
+
+    google.script.run
+      .withSuccessHandler(function(stats){
+        google.script.run
+          .withSuccessHandler(function(list){
+            if(btn){btn.disabled=false;btn.textContent='Unlock Dashboard';}
+            if(stats && stats.ok===false){
+              if(error) error.textContent=stats.message||'Unable to load dashboard.';
+              return;
+            }
+            if(list && list.ok===false){
+              if(error) error.textContent=list.message||'Unable to load registrations.';
+              return;
+            }
+
+            var login=document.getElementById('adminLogin');
+            var dash=document.getElementById('dashboard');
+            if(login) login.style.display='none';
+            if(dash) dash.style.display='block';
+
+            var rows=(list && list.rows)||[];
+            window.adminData=rows;
+
+            var s=stats||{};
+            var statEl=document.getElementById('stats');
+            if(statEl){
+              var items=[
+                ['Total',s.total||0],['Confirmed',s.confirmed||0],
+                ['Male',s.male||0],['Female',s.female||0],
+                ['Solapur',s.solapur||0],['Outside',s.outsideSolapur||0],
+                ['Urdu',s.urdu||0],['English',s.english||0],['Hindi',s.hindi||0]
+              ];
+              statEl.innerHTML=items.map(function(x){
+                return '<div class="stat"><b>'+x[1]+'</b><span>'+x[0]+'</span></div>';
+              }).join('');
+            }
+            if(typeof renderAdmin==='function') renderAdmin(rows);
+            window.scrollTo(0,0);
+          })
+          .withFailureHandler(function(e){
+            if(btn){btn.disabled=false;btn.textContent='Unlock Dashboard';}
+            if(error) error.textContent=(e && e.message)||String(e||'Unable to load registrations.');
+          })
+          .adminList(pin);
+      })
+      .withFailureHandler(function(e){
+        if(btn){btn.disabled=false;btn.textContent='Unlock Dashboard';}
+        if(error) error.textContent=(e && e.message)||String(e||'Unable to load dashboard.');
+      })
+      .adminStats(pin);
+  };
+
+  window.logoutAdmin = function(){
+    window.adminPin='';
+    window.adminData=[];
+    var dash=document.getElementById('dashboard');
+    var login=document.getElementById('adminLogin');
+    if(dash) dash.style.display='none';
+    if(login) login.style.display='block';
+    var pin=document.getElementById('pin');
+    if(pin) pin.value='';
+    var error=document.getElementById('adminError');
+    if(error) error.textContent='';
+    if(typeof showScreen==='function') showScreen('registerCard',1);
+    else {
+      document.querySelectorAll('.screen').forEach(function(x){x.classList.remove('active');});
+      document.getElementById('registerCard').classList.add('active');
+    }
+  };
+})();
+</script>
+</body></html>
