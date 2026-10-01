@@ -69,6 +69,31 @@ td select{font-size:11px;padding:4px;border-radius:6px;border:1px solid #cdd9d6}
 #toast.on{opacity:1}
 a.btnlink{display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;width:100%;min-height:52px;border-radius:13px;margin-top:12px;font-weight:900;padding:8px 12px}
 a.btnlink.wa{background:#128c4a;color:#fff;min-height:46px;margin-top:10px;font-size:13px;padding:7px 10px}
+.gpay-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  background:#fff !important;
+  color:#3c4043 !important;
+  border:1.5px solid #dadce0 !important;
+  box-shadow:0 2px 5px rgba(60,64,67,.20);
+  font-weight:800;
+}
+.gpay-btn:hover{
+  background:#f8f9fa !important;
+  box-shadow:0 3px 8px rgba(60,64,67,.24);
+}
+.gpay-btn:active{
+  background:#f1f3f4 !important;
+}
+.gpay-btn img{
+  width:42px;
+  height:24px;
+  object-fit:contain;
+  border-radius:0;
+}
+
 a.btnlink.map{background:#e8f0fe;color:#1a4fa3}
 details.more{margin-top:12px;text-align:left;background:#fff;border:1px solid #d9eae4;border-radius:12px;padding:10px 12px}
 details.more summary{font-weight:900;font-size:13px;color:#063f45;cursor:pointer}
@@ -83,6 +108,11 @@ details.more summary{font-weight:900;font-size:13px;color:#063f45;cursor:pointer
  #confirmation{position:absolute;left:0;top:0;width:100%}
  #confirmation [data-noprint]{display:none!important}
 }
+
+.waAction{border:0;border-radius:9px;background:#075e54;color:#fff;font-weight:800;font-size:11px;padding:7px 9px;white-space:nowrap;cursor:pointer}
+.waAction:hover{background:#054c44}
+.manualText{width:100%;min-height:145px;border:1px solid #d4e0dd;border-radius:12px;background:#fff;padding:12px;outline:none;resize:vertical;font-size:14px;line-height:1.5}.manualText:focus{border-color:#063f45;box-shadow:0 0 0 3px #063f4514}.manualHint{font-size:11px;color:#718084;line-height:1.5;margin-top:7px}.manualBox{margin-top:12px;background:#f8fbfa;border:1px solid #d9e7e3;border-radius:14px;padding:13px}.manualTitle{font-size:15px;font-weight:900;color:#063f45}.manualGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.manualGrid .field{margin-top:10px}.manualResult{margin-top:10px;padding:10px;border-radius:10px;background:#effaf3;border:1px solid #bfe3cc;color:#17633f;font-size:13px;font-weight:800}
+@media(max-width:350px){.manualGrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -141,7 +171,9 @@ details.more summary{font-weight:900;font-size:13px;color:#063f45;cursor:pointer
    <div class="muted">PAYMENT AMOUNT</div><div class="amount">₹50</div>
 
    <div class="qr" id="qr"></div>
-   <button type="button" class="primary" data-action="saveQr" style="margin-top:6px">📲 Pay with UPI</button>
+   <button type="button" class="primary gpay-btn" data-action="payGpay" style="margin-top:6px"><img src="data:image/png;base64,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" alt="Google Pay"> <span>Pay with G Pay</span></button>
+   <button type="button" class="secondary" data-action="saveQr" style="margin-top:8px">💾 Save QR Image</button>
+   <div class="muted" style="margin-top:8px">Other UPI apps: scan the QR code above.</div>
 
    <div class="idrow"><span><b>UPI ID:</b> <span id="upiText"></span></span><button type="button" data-action="copy" id="copyMain" data-copy="">Copy</button></div>
    <div class="idrow" id="altRow"><span><b>Alternate UPI ID:</b> <span id="altText"></span></span><button type="button" data-action="copy" id="copyAlt" data-copy="">Copy</button></div>
@@ -189,11 +221,39 @@ details.more summary{font-weight:900;font-size:13px;color:#063f45;cursor:pointer
    <div id="adminError" class="error" role="alert"></div>
    <button type="button" class="primary" id="adminLoginBtn" data-action="adminLogin">Unlock Dashboard</button></div>
   <div id="dashboard" hidden>
+   <div class="manualBox">
+    <div class="manualTitle">➕ Manual Registration</div>
+    <div class="sub">Enter participant details manually. Registration number will be generated automatically.</div>
+    <div class="field">
+     <label for="manualText">QUICK TEXT ENTRY</label>
+     <textarea id="manualText" class="manualText" placeholder="Name: Ahmed Shaikh
+Age: 35
+Gender: Male
+Location: Solapur
+Mobile: 9988776655
+Language: Hindi
+Payment Status: Done"></textarea>
+     <div class="manualHint">Paste one participant in the format above, then click <b>Load Details</b>. You can review/edit the fields below before saving.</div>
+     <button type="button" class="secondary" data-action="manualParse" style="margin-top:8px">↳ Load Details from Text</button>
+    </div>
+    <div class="manualGrid">
+     <div class="field"><label for="manualName">FULL NAME *</label><input id="manualName" placeholder="Participant name"></div>
+     <div class="field"><label for="manualAge">AGE *</label><input id="manualAge" type="number" min="16" max="120" inputmode="numeric" placeholder="Age"></div>
+     <div class="field"><label for="manualGender">GENDER *</label><select id="manualGender"><option value="">Select gender</option><option>Male</option><option>Female</option></select></div>
+     <div class="field"><label for="manualCity">LOCATION *</label><select id="manualCity"><option value="">Select location</option><option>Solapur</option><option>Outside Solapur</option></select></div>
+     <div class="field"><label for="manualMobile">MOBILE NUMBER *</label><input id="manualMobile" type="tel" inputmode="numeric" maxlength="14" placeholder="10-digit mobile"></div>
+     <div class="field"><label for="manualLanguage">LANGUAGE *</label><select id="manualLanguage"><option value="">Select language</option><option>Urdu</option><option>English</option><option>Hindi</option></select></div>
+     <div class="field"><label for="manualPayment">PAYMENT STATUS *</label><select id="manualPayment"><option value="DONE">Done</option><option value="PENDING">Pending</option></select></div>
+    </div>
+    <div id="manualError" class="error" role="alert"></div>
+    <button type="button" class="primary" id="manualSaveBtn" data-action="manualSave">💾 Save Manual Registration</button>
+    <div id="manualResult" class="manualResult" hidden></div>
+   </div>
    <div class="stats" id="stats"></div>
    <div class="field"><input id="adminSearch" placeholder="Search name / mobile / registration..."></div>
    <div class="row2"><button type="button" class="secondary" data-action="adminRefresh">↻ Refresh</button><button type="button" class="secondary" data-action="adminExport">⬇ Export CSV</button></div>
    <div id="adminMsg" class="muted" style="margin-top:8px"></div>
-   <div class="tableWrap"><table><thead><tr><th>Reg No</th><th>Name</th><th>Age</th><th>Gender</th><th>City</th><th>Mobile</th><th>Language</th><th>Payment</th><th>Status</th><th>Screenshot</th></tr></thead><tbody id="adminRows"></tbody></table></div>
+   <div class="tableWrap"><table><thead><tr><th>Reg No</th><th>Name</th><th>Age</th><th>Gender</th><th>City</th><th>Mobile</th><th>Language</th><th>Payment</th><th>Status</th><th>Screenshot</th><th>Action</th></tr></thead><tbody id="adminRows"></tbody></table></div>
   </div>
  </div>
 </section>
@@ -308,6 +368,12 @@ async function call(fn, args) {
         if (r && r.ok) decorate(r.row);
         return r;
       }
+      case 'adminManualEntry': {
+        const p = args[1];
+        const r = await rpc('admin_manual_entry', { p_pin: args[0], p_name: p.name, p_age: Number(p.age), p_gender: p.gender, p_city: p.city, p_mobile: p.mobile, p_language: p.language, p_payment_status: p.paymentStatus });
+        if (r && r.ok) decorate(r.row);
+        return r;
+      }
       default: throw new Error('Unknown action.');
     }
   } catch (e) {
@@ -351,7 +417,7 @@ function renderPayment() {
   $('upiText').textContent = UPI; $('copyMain').dataset.copy = UPI;
   $('altRow').hidden = !ALT_UPI; $('altText').textContent = ALT_UPI; $('copyAlt').dataset.copy = ALT_UPI;
   const contact = getWhatsappNumber(state.gender);
-  $('helpLink').href = 'https://wa.me/' + contact + '?text=' + encodeURIComponent('Payment help needed for workshop registration ' + (state.regNo || '') );
+  $('helpLink').href = 'https://wa.me/' + contact + '?text=' + encodeURIComponent('Assalamualaikum, I need help regarding workshop registration\nName: ' + (state.name || '') + '\nRegistration: ' + (state.regNo || '') );
   $('helpLink').innerHTML = '💬 Payment help? WhatsApp ' + formatWhatsapp(contact);
   const img = new Image(); img.alt = 'Payment QR'; img.src = QR_IMG;
   $('qr').innerHTML = ''; $('qr').appendChild(img);
@@ -381,6 +447,12 @@ async function chooseCash() {
     renderConfirm(res); showScreen('confirmCard', 3);
   } catch (e) { $('payError').textContent = e.message; }
   finally { btn.disabled = false; btn.textContent = label; }
+}
+async function payGpay() {
+  const url = 'gpay://upi/pay?' + upiParams();
+  const fallback = 'https://pay.google.com/gp/v/u/0/home';
+  try { window.location.href = url; } catch (e) { window.location.href = fallback; }
+  setTimeout(() => { toast('If GPay did not open, scan the QR code using your UPI app.'); }, 1200);
 }
 async function saveQr() {
   try {
@@ -459,22 +531,52 @@ function onRegister(ev) {
   if (!p.gender || !p.city || !p.language) { err.textContent = 'Please select all required fields.'; return; }
   if (!MOBILE_RE.test(p.mobile)) { err.textContent = 'Enter a valid 10-digit mobile number.'; return; }
 
-  // Open the payment screen IMMEDIATELY; the registration is created in the background.
+  // Validate/create/resume the registration first, then open the correct next stage.
+  // This is important when the same mobile number is used by different participants:
+  // only an exact Name + Mobile match resumes the previous unfinished registration.
   state.regNo = ''; state.mobile = p.mobile; state.name = p.name; state.gender = p.gender; state.regBusy = true;
-  renderPayment(); showScreen('paymentCard', 2);
   const req = ++state.regReq;
 
   call('submitRegistration', [p]).then(res => {
-    if (req !== state.regReq) return;                       // a newer attempt replaced this one
+    if (req !== state.regReq) return;
     state.regBusy = false;
     if (!res || res.ok === false) { failRegistration(res, p); return; }
-    state.regNo = res.registrationNo;
-    store({ regNo: state.regNo, mobile: state.mobile, name: state.name, gender: state.gender });
-    if (res.resumed) toast('Your earlier registration was found. Please complete payment.');
+
+    // Use the database-returned participant details. For a resumed registration,
+    // these are the saved values from the previous attempt.
+    state.regNo = res.registrationNo || '';
+    state.mobile = res.mobile || p.mobile;
+    state.name = res.name || p.name;
+    state.gender = res.gender || p.gender;
+
+    $('name').value = res.name || p.name;
+    $('age').value = (res.age != null ? res.age : p.age);
+    $('gender').value = res.gender || p.gender;
+    $('city').value = res.city || p.city;
+    $('mobile').value = res.mobile || p.mobile;
+    $('language').value = res.language || p.language;
+
+    store({
+      regNo: state.regNo,
+      mobile: state.mobile,
+      name: state.name,
+      age: res.age != null ? res.age : p.age,
+      gender: res.gender || p.gender,
+      city: res.city || p.city,
+      language: res.language || p.language
+    });
+
+    if (res.resumed) {
+      toast('Your earlier registration was found. Your details have been restored.');
+    }
+
+    // Both new and resumed registrations continue from the payment stage.
     renderPayment();
+    showScreen('paymentCard', 2);
   }).catch(e => {
     if (req !== state.regReq) return;
-    state.regBusy = false; failRegistration({ message: e.message }, p);
+    state.regBusy = false;
+    failRegistration({ message: e.message }, p);
   });
 }
 function failRegistration(res, p) {
@@ -490,6 +592,8 @@ function checkPending() {
   const s = loadStore();
   if (s && s.regNo && s.mobile) {
     state.regNo = s.regNo; state.mobile = s.mobile; state.name = s.name || ''; state.gender = s.gender || '';
+    $('name').value = s.name || ''; $('age').value = s.age || ''; $('gender').value = s.gender || '';
+    $('city').value = s.city || ''; $('mobile').value = s.mobile || ''; $('language').value = s.language || '';
     $('resumeReg').textContent = s.regNo; $('resumeBox').hidden = false;
   } else $('resumeBox').hidden = true;
 }
@@ -514,7 +618,7 @@ function renderConfirm(d) {
    (ok ? '<div class="notice"><b>Important:</b> Please save this confirmation or take a screenshot. Bring your registration number to the program.</div>' : '') +
    (cash ? '<div class="notice"><b>How to pay cash:</b> contact the organisers on <b>70284 88819 / 99608 05017</b> and quote <b>' + esc(d.registrationNo) + '</b>. Your registration is confirmed once they receive ₹50. Keep this number safe.</div>' : '') +
    '<a class="btnlink wa" data-noprint href="' + COMMUNITY_WHATSAPP + '" target="_blank" rel="noopener">💬 Join WhatsApp Community</a>' +
-   '<a class="btnlink wa wa-organiser" data-noprint href="https://wa.me/' + getWhatsappNumber(d.gender) + '?text=' + encodeURIComponent('Assalamualaikum, I need help regarding workshop registration ' + d.registrationNo) + '" target="_blank" rel="noopener">📞 WhatsApp Organiser: ' + formatWhatsapp(getWhatsappNumber(d.gender)) + '</a>' +
+   '<a class="btnlink wa wa-organiser" data-noprint href="https://wa.me/' + getWhatsappNumber(d.gender) + '?text=' + encodeURIComponent('Assalamualaikum, I need help regarding workshop registration\nName: ' + (d.name || '') + '\nRegistration: ' + d.registrationNo) + '" target="_blank" rel="noopener">📞 WhatsApp Organiser: ' + formatWhatsapp(getWhatsappNumber(d.gender)) + '</a>' +
    (!cancelled ? '<a class="btnlink map" data-noprint href="' + esc(MAP_URL) + '" target="_blank" rel="noopener">📍 Open Location in Google Maps</a>' : '') +
    (!ok && !cancelled ? '<button type="button" class="primary" data-noprint data-action="resumeFromConfirm">' + (cash ? 'Pay online instead →' : 'Complete Payment →') + '</button>' : '');
 }
@@ -583,6 +687,76 @@ function renderStats(s) {
   $('stats').innerHTML = items.map(x => '<div class="stat"><b>' + (x[1] || 0) + '</b><span>' + x[0] + '</span></div>').join('');
 }
 function safeUrl(u) { return (typeof u === 'string' && u.indexOf(PUBLIC_SHOT) === 0) ? u : ''; }
+function whatsappPaymentMessage(r) {
+  const lang = String(r.language || '').trim().toLowerCase();
+  if (lang === 'hindi') {
+    return `अस्सलामु अलैकुम व रहमतुल्लाहि व बरकातुहु\n\nआपका रजिस्ट्रेशन सफलतापूर्वक पूरा हो गया है।\n\nकृपया भुगतान का स्क्रीनशॉट साझा करें।\n\nRegistration No.: ${r.registrationNo}`;
+  }
+  if (lang === 'urdu') {
+    return `السلام علیکم ورحمۃ اللہ وبرکاتہ\n\nآپ کی رجسٹریشن کامیابی کے ساتھ مکمل ہو گئی ہے۔\n\nبراہِ کرم ادائیگی کا اسکرین شاٹ شیئر کریں۔\n\nRegistration No.: ${r.registrationNo}`;
+  }
+  return `Assalamu'alaikum warahmatullahi wabarakatuhu\n\nYour Registration has been successfully completed.\n\nKindly share your payment screenshot.\n\nRegistration No.: ${r.registrationNo}`;
+}
+function whatsappPaymentReminder(r) {
+  const mobile = String(r.mobile || '').replace(/\D/g, '');
+  if (!/^[6-9]\d{9}$/.test(mobile)) return;
+  const url = 'https://wa.me/91' + mobile + '?text=' + encodeURIComponent(whatsappPaymentMessage(r));
+  window.open(url, '_blank', 'noopener');
+}
+function parseManualText() {
+  const raw = String($('manualText').value || '').trim();
+  const err = $('manualError');
+  err.textContent = '';
+  if (!raw) { err.textContent = 'Paste the participant details in the text box first.'; return; }
+
+  const data = {};
+  raw.split(/\r?\n/).forEach(line => {
+    const m = line.match(/^\s*([^:]+)\s*:\s*(.*?)\s*$/);
+    if (m) data[m[1].trim().toLowerCase()] = m[2].trim();
+  });
+
+  const pick = (...keys) => { for (const k of keys) if (data[k]) return data[k]; return ''; };
+  const gender = pick('gender').toLowerCase();
+  const city = pick('location','city').toLowerCase();
+  const language = pick('language').toLowerCase();
+  const payment = pick('payment status','payment').toLowerCase();
+
+  $('manualName').value = pick('name');
+  $('manualAge').value = pick('age');
+  $('manualGender').value = gender === 'male' ? 'Male' : gender === 'female' ? 'Female' : '';
+  $('manualCity').value = city === 'solapur' ? 'Solapur' : city === 'outside solapur' ? 'Outside Solapur' : '';
+  $('manualMobile').value = pick('mobile','mobile number').replace(/\D/g,'').slice(-10);
+  $('manualLanguage').value = language === 'urdu' ? 'Urdu' : language === 'english' ? 'English' : language === 'hindi' ? 'Hindi' : '';
+  $('manualPayment').value = /^(done|paid|completed|complete)$/i.test(payment) ? 'DONE' : 'PENDING';
+
+  if (!$('manualName').value || !$('manualAge').value || !$('manualGender').value || !$('manualCity').value || !$('manualMobile').value || !$('manualLanguage').value) {
+    err.textContent = 'Some fields could not be recognised. Please check the text format and the fields loaded below.';
+    return;
+  }
+  $('manualResult').hidden = true;
+  toast('Details loaded. Review them and click Save Manual Registration.');
+}
+
+async function saveManualRegistration() {
+  const err = $('manualError'), result = $('manualResult');
+  err.textContent = ''; result.hidden = true; result.textContent = '';
+  const p = {name:$('manualName').value.trim().replace(/\s+/g,' '),age:$('manualAge').value.trim(),gender:$('manualGender').value,city:$('manualCity').value,mobile:digits10($('manualMobile').value),language:$('manualLanguage').value,paymentStatus:$('manualPayment').value};
+  if (p.name.length < 2) { err.textContent='Enter the participant name.'; return; }
+  if (!p.age || Number(p.age)<16 || Number(p.age)>120) { err.textContent='Enter a valid age (16–120).'; return; }
+  if (!p.gender || !p.city || !p.language) { err.textContent='Please select all required fields.'; return; }
+  if (!MOBILE_RE.test(p.mobile)) { err.textContent='Enter a valid 10-digit mobile number.'; return; }
+  const btn=$('manualSaveBtn'), label=btn.textContent; btn.disabled=true; btn.textContent='Saving...'; $('adminMsg').textContent='Saving manual registration...';
+  try {
+    const res=await call('adminManualEntry',[state.pin,p]);
+    if (!res || res.ok===false) throw new Error((res&&res.message)||'Manual registration failed.');
+    result.innerHTML='✓ Saved successfully — Registration No.: <b>'+esc(res.registrationNo)+'</b>'; result.hidden=false;
+    await adminLogin(state.pin, true);
+    ['manualName','manualAge','manualMobile'].forEach(id=>$(id).value=''); $('manualGender').value=''; $('manualCity').value=''; $('manualLanguage').value=''; $('manualPayment').value='DONE';
+    $('adminMsg').textContent=res.registrationNo+' added successfully.';
+  } catch(e) { err.textContent=e.message; $('adminMsg').textContent=''; }
+  finally { btn.disabled=false; btn.textContent=label; }
+}
+
 function renderAdmin() {
   const q = $('adminSearch').value.toLowerCase().trim();
   const rows = q ? state.rows.filter(r => [r.registrationNo, r.name, r.mobile, r.city, r.language, r.registrationStatus].join(' ').toLowerCase().includes(q)) : state.rows;
@@ -593,8 +767,11 @@ function renderAdmin() {
     return '<tr><td>' + esc(r.registrationNo) + '</td><td>' + esc(r.name) + '</td><td>' + esc(r.age) + '</td><td>' + esc(r.gender) +
       '</td><td>' + esc(r.city) + '</td><td>' + esc(r.mobile) + '</td><td>' + esc(r.language) + '</td><td>' + esc(r.paymentStatus) +
       '</td><td><select class="statusSel" data-reg="' + esc(r.registrationNo) + '">' + sel + '</select></td><td>' +
-      (u ? '<a href="' + esc(u) + '" target="_blank" rel="noopener">Open</a>' : '-') + '</td></tr>';
-  }).join('') || '<tr><td colspan="10">No registrations found.</td></tr>';
+      (u ? '<a href="' + esc(u) + '" target="_blank" rel="noopener">Open</a>' : '-') + '</td><td>' +
+      (String(r.registrationStatus || '').toUpperCase() === 'INCOMPLETE' ?
+        '<button type="button" class="waAction" data-action="paymentWhatsApp" data-reg="' + esc(r.registrationNo) + '">💬 WhatsApp</button>' : '-') +
+      '</td></tr>';
+  }).join('') || '<tr><td colspan="11">No registrations found.</td></tr>';
 }
 async function onStatusChange(sel) {
   const reg = sel.dataset.reg, status = sel.value;
@@ -633,6 +810,7 @@ const actions = {
   copy: t => copyText(t.dataset.copy),
   cash: chooseCash,
   saveQr: saveQr,
+  payGpay: payGpay,
   submitShot: submitShot,
   print: () => window.print(),
   share: shareConfirm,
@@ -641,6 +819,9 @@ const actions = {
   adminLogout: adminLogout,
   adminRefresh: adminRefresh,
   adminExport: exportCsv,
+  manualParse: parseManualText,
+  manualSave: saveManualRegistration,
+  paymentWhatsApp: t => { const r = state.rows.find(x => x.registrationNo === t.dataset.reg); if (r) whatsappPaymentReminder(r); },
   resume: goPayment,
   discardResume: () => { store(null); state.regNo = ''; state.mobile = ''; state.name = ''; state.gender = ''; $('resumeBox').hidden = true; },
   resumeFromConfirm: goPayment,
@@ -659,6 +840,7 @@ $('adminRows').addEventListener('change', e => { if (e.target.classList.contains
 $('pin').addEventListener('keydown', e => { if (e.key === 'Enter') adminLogin(); });
 $('lookupMob').addEventListener('keydown', e => { if (e.key === 'Enter') doLookup(); });
 ['mobile','lookupMob'].forEach(id => $(id).addEventListener('input', e => { e.target.value = e.target.value.replace(/[^\d+ ]/g, ''); }));
+$('manualMobile').addEventListener('input', e => { e.target.value = e.target.value.replace(/[^\d+ ]/g, ''); });
 
 checkPending();
 if (!SB_OK) $('formError').textContent = 'Setup needed: set SUPABASE_URL and SUPABASE_KEY inside index.html.';
