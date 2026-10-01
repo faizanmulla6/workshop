@@ -19,9 +19,9 @@ button{border:0;cursor:pointer}
 .headerRow{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .brand{font-size:10px;letter-spacing:1px;font-weight:800;opacity:.85}
 .adminTop{color:#fff;background:#ffffff18;border:1px solid #ffffff55;border-radius:20px;padding:8px 11px;font-size:11px;font-weight:800}
-h1{font-size:27px;line-height:1.08;margin:15px 0 5px;letter-spacing:-.6px}
-.subtitle{color:#f4d277;font-size:15px;font-weight:800}
-.eventChip{display:inline-block;margin-top:12px;padding:7px 10px;border-radius:20px;background:#ffffff12;border:1px solid #ffffff2b;font-size:11px}
+h1{font-size:27px;line-height:1.08;margin:15px 0 5px;letter-spacing:-.6px;text-align:center}
+.subtitle{color:#f4d277;font-size:15px;font-weight:800;text-align:center}
+.eventChip{display:table;margin:12px auto 0;padding:7px 10px;border-radius:20px;background:#ffffff12;border:1px solid #ffffff2b;font-size:11px}
 .content{padding:12px 12px 0}
 .screen{display:none}.screen.active{display:block}
 .card{background:#fff;border:1px solid #e3ebe8;border-radius:17px;padding:16px;margin-bottom:12px;box-shadow:0 3px 16px #1832380b}
@@ -68,7 +68,7 @@ td select{font-size:11px;padding:4px;border-radius:6px;border:1px solid #cdd9d6}
 #toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:#183238;color:#fff;padding:10px 16px;border-radius:22px;font-size:13px;font-weight:700;z-index:50;max-width:88vw;text-align:center;opacity:0;pointer-events:none;transition:opacity .2s}
 #toast.on{opacity:1}
 a.btnlink{display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;width:100%;min-height:52px;border-radius:13px;margin-top:12px;font-weight:900;padding:8px 12px}
-a.btnlink.wa{background:#25d366;color:#fff}
+a.btnlink.wa{background:#128c4a;color:#fff;min-height:46px;margin-top:10px;font-size:13px;padding:7px 10px}
 a.btnlink.map{background:#e8f0fe;color:#1a4fa3}
 details.more{margin-top:12px;text-align:left;background:#fff;border:1px solid #d9eae4;border-radius:12px;padding:10px 12px}
 details.more summary{font-weight:900;font-size:13px;color:#063f45;cursor:pointer}
@@ -89,7 +89,7 @@ details.more summary{font-weight:900;font-size:13px;color:#063f45;cursor:pointer
 <div id="app">
 <header class="header">
  <div class="headerRow"><div class="brand">EK ROZAH TARBIYATI WORKSHOP</div><button type="button" class="adminTop" data-action="admin">🔒 ADMIN</button></div>
- <h1>Tahaffuz-e-Aqeedah<br>Wa Manhaj</h1>
+ <h1>Tahaffuz-e-Aqeedah Wa Manhaj</h1>
  <div class="subtitle">Registration Portal</div>
  <div class="eventChip">18 October 2026 • Sunday • ₹50</div>
 </header>
@@ -140,28 +140,8 @@ details.more summary{font-weight:900;font-size:13px;color:#063f45;cursor:pointer
   <div class="paymentBox" style="margin-top:13px">
    <div class="muted">PAYMENT AMOUNT</div><div class="amount">₹50</div>
 
-   <div id="payApps">
-    <a class="paybtn" id="payOther" target="_top" href="#" style="background:#063f45;color:#fff;margin-top:12px">📲 Pay ₹50 with UPI app</a>
-    <div class="muted" style="margin-top:7px">Choose your app, enter <b>₹50</b> and pay.</div>
-    <details class="more"><summary>Pick a specific app</summary>
-     <div class="paygrid">
-      <a class="paybtn" id="payGpay" target="_top" href="#">Google Pay</a>
-      <a class="paybtn" id="payPhonepe" target="_top" href="#">PhonePe</a>
-      <a class="paybtn" id="payPaytm" target="_top" href="#">Paytm</a>
-     </div>
-    </details>
-   </div>
-   <div id="payDesktop" class="notice" hidden>💻 You are on a computer. Scan the QR below with your phone's UPI app.</div>
-
-   <div class="notice" style="text-align:left;margin-top:14px"><b>App declined or did not open?</b> Use either method (both always work):
-    <ol class="steps2">
-     <li><b>Scan:</b> tap <b>Save QR</b> below → open your UPI app → <b>Scan</b> → choose the image from <b>Gallery</b> → enter ₹50.</li>
-     <li><b>UPI ID:</b> copy an ID below → in your UPI app choose <b>Pay to UPI ID</b> → paste → enter ₹50.</li>
-    </ol>
-   </div>
-
    <div class="qr" id="qr"></div>
-   <button type="button" class="secondary" data-action="saveQr" style="margin-top:6px">⬇ Save QR image</button>
+   <button type="button" class="primary" data-action="saveQr" style="margin-top:6px">📲 Pay with UPI</button>
 
    <div class="idrow"><span><b>UPI ID:</b> <span id="upiText"></span></span><button type="button" data-action="copy" id="copyMain" data-copy="">Copy</button></div>
    <div class="idrow" id="altRow"><span><b>Alternate UPI ID:</b> <span id="altText"></span></span><button type="button" data-action="copy" id="copyAlt" data-copy="">Copy</button></div>
@@ -225,7 +205,7 @@ details.more summary{font-weight:900;font-size:13px;color:#063f45;cursor:pointer
  <button type="button" id="navLookup" data-action="lookup">🔎<br>My Registration</button>
  <button type="button" id="navAdmin" data-action="admin">🔒<br>Admin</button>
 </nav>
-<div class="footer">ZILAYI JAMIAT AHLE HADEES, SOLAPUR<br>Mard: 70284 88819 • 99608 05017 &nbsp;|&nbsp; Khawateen: 95526 64469</div>
+<div class="footer">ZILAYI JAMIAT AHLE HADEES, SOLAPUR<br>70284 88819 • 99608 05017</div>
 </div>
 <div id="toast"></div>
 
@@ -246,8 +226,9 @@ const STORE_KEY = 'erw_pending_v5';
 const PREFILL_AMOUNT = false;
 const ALT_UPI = '';                                  // optional second UPI ID. '' = hidden
 const MAP_URL = 'https://maps.app.goo.gl/i9vBr7WwEBXtUWYk6';   // venue location
-const HELP_WHATSAPP_MALE = '917028488819';           // men's organiser WhatsApp number with country code
-const HELP_WHATSAPP_FEMALE = '919552664469';         // women's organiser WhatsApp number with country code
+const COMMUNITY_WHATSAPP = 'https://chat.whatsapp.com/C07r8Wz9XQOEAjZpZt8uaB';
+const MALE_WHATSAPP = '917028488819';
+const FEMALE_WHATSAPP = '919552664469';
 const UA = navigator.userAgent || '', IS_ANDROID = /Android/i.test(UA), IS_IOS = /iPhone|iPad|iPod/i.test(UA), IS_MOBILE = IS_ANDROID || IS_IOS;
 
 /* ============================== HELPERS ============================ */
@@ -369,15 +350,9 @@ function renderPayment() {
   $('payReg').textContent = state.regBusy ? 'Creating…' : (state.regNo || '—');
   $('upiText').textContent = UPI; $('copyMain').dataset.copy = UPI;
   $('altRow').hidden = !ALT_UPI; $('altText').textContent = ALT_UPI; $('copyAlt').dataset.copy = ALT_UPI;
-  $('payGpay').href    = 'tez://upi/pay?' + p;
-  $('payPhonepe').href = 'phonepe://pay?' + p;
-  $('payPaytm').href   = 'paytmmp://upi/pay?' + p;
-  $('payOther').href   = 'upi://pay?' + p;
-  $('payApps').hidden = !IS_MOBILE; $('payDesktop').hidden = IS_MOBILE;
-  // iOS has no app chooser: show the specific apps directly
-  const more = document.querySelector('details.more'); if (more) more.open = IS_IOS;
-  const helpNum = state.gender.toLowerCase() === 'female' ? HELP_WHATSAPP_FEMALE : HELP_WHATSAPP_MALE;
-  $('helpLink').href = 'https://wa.me/' + helpNum + '?text=' + encodeURIComponent('Payment help needed for workshop registration ' + (state.regNo || '') );
+  const contact = getWhatsappNumber(state.gender);
+  $('helpLink').href = 'https://wa.me/' + contact + '?text=' + encodeURIComponent('Payment help needed for workshop registration ' + (state.regNo || '') );
+  $('helpLink').innerHTML = '💬 Payment help? WhatsApp ' + formatWhatsapp(contact);
   const img = new Image(); img.alt = 'Payment QR'; img.src = QR_IMG;
   $('qr').innerHTML = ''; $('qr').appendChild(img);
   $('payError').textContent = '';
@@ -537,11 +512,14 @@ function renderConfirm(d) {
    '<hr style="border:0;border-top:1px solid #eadfae;margin:15px 0">' +
    '<div class="grid">' + info('VENUE', d.venue) + info('DATE', d.programDate) + info('REPORTING', d.reportingTime) + info('PROGRAM', d.programTime) + '</div>' +
    (ok ? '<div class="notice"><b>Important:</b> Please save this confirmation or take a screenshot. Bring your registration number to the program.</div>' : '') +
-   (cash ? '<div class="notice"><b>How to pay cash:</b> contact the organisers on <b>' + (String(d.gender).toLowerCase() === 'female' ? '95526 64469' : '70284 88819 / 99608 05017') + '</b> and quote <b>' + esc(d.registrationNo) + '</b>. Your registration is confirmed once they receive ₹50. Keep this number safe.</div>' : '') +
-   (!cancelled && safeGroup(d.groupLink) ? '<a class="btnlink wa" data-noprint href="' + esc(d.groupLink) + '" target="_blank" rel="noopener">💬 Join ' + (String(d.gender).toLowerCase() === 'female' ? "Women's" : "Men's") + ' WhatsApp Group</a>' : '') +
+   (cash ? '<div class="notice"><b>How to pay cash:</b> contact the organisers on <b>70284 88819 / 99608 05017</b> and quote <b>' + esc(d.registrationNo) + '</b>. Your registration is confirmed once they receive ₹50. Keep this number safe.</div>' : '') +
+   '<a class="btnlink wa" data-noprint href="' + COMMUNITY_WHATSAPP + '" target="_blank" rel="noopener">💬 Join WhatsApp Community</a>' +
+   '<a class="btnlink wa wa-organiser" data-noprint href="https://wa.me/' + getWhatsappNumber(d.gender) + '?text=' + encodeURIComponent('Assalamualaikum, I need help regarding workshop registration ' + d.registrationNo) + '" target="_blank" rel="noopener">📞 WhatsApp Organiser: ' + formatWhatsapp(getWhatsappNumber(d.gender)) + '</a>' +
    (!cancelled ? '<a class="btnlink map" data-noprint href="' + esc(MAP_URL) + '" target="_blank" rel="noopener">📍 Open Location in Google Maps</a>' : '') +
    (!ok && !cancelled ? '<button type="button" class="primary" data-noprint data-action="resumeFromConfirm">' + (cash ? 'Pay online instead →' : 'Complete Payment →') + '</button>' : '');
 }
+function getWhatsappNumber(gender) { return String(gender || '').toLowerCase() === 'female' ? FEMALE_WHATSAPP : MALE_WHATSAPP; }
+function formatWhatsapp(number) { const n = String(number || '').replace(/^91/, ''); return n.length === 10 ? n.slice(0,5) + ' ' + n.slice(5) : number; }
 function safeGroup(u) { return typeof u === 'string' && u.indexOf('https://chat.whatsapp.com/') === 0; }
 function info(l, v) { return '<div class="info"><small>' + l + '</small><b>' + esc(v) + '</b></div>'; }
 
@@ -553,7 +531,7 @@ async function doLookup() {
   try {
     const res = await call('getRegistration', [n, m]);
     if (!res || res.ok === false) throw new Error((res && res.message) || 'Not found.');
-    state.participant = res; state.regNo = res.registrationNo; state.mobile = m; state.gender = res.gender || state.gender;
+    state.participant = res; state.regNo = res.registrationNo; state.mobile = m; state.gender = res.gender || '';
     renderConfirm(res); showScreen('confirmCard', 3);
   } catch (e) { err.textContent = e.message; }
   finally { btn.disabled = false; btn.textContent = label; }
@@ -664,7 +642,7 @@ const actions = {
   adminRefresh: adminRefresh,
   adminExport: exportCsv,
   resume: goPayment,
-  discardResume: () => { store(null); state.regNo = ''; state.mobile = ''; $('resumeBox').hidden = true; },
+  discardResume: () => { store(null); state.regNo = ''; state.mobile = ''; state.name = ''; state.gender = ''; $('resumeBox').hidden = true; },
   resumeFromConfirm: goPayment,
   prefillLookup: t => { $('lookupNo').value = t.dataset.reg || ''; $('lookupMob').value = t.dataset.mob || ''; showScreen('lookupCard'); }
 };
