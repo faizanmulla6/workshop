@@ -689,13 +689,16 @@ function renderStats(s) {
 function safeUrl(u) { return (typeof u === 'string' && u.indexOf(PUBLIC_SHOT) === 0) ? u : ''; }
 function whatsappPaymentMessage(r) {
   const lang = String(r.language || '').trim().toLowerCase();
+
   if (lang === 'hindi') {
-    return `अस्सलामु अलैकुम व रहमतुल्लाहि व बरकातुहु\n\nआपका रजिस्ट्रेशन सफलतापूर्वक पूरा हो गया है।\n\nकृपया भुगतान का स्क्रीनशॉट साझा करें।\n\nRegistration No.: ${r.registrationNo}`;
+    return `अस्सालामु अलैकुम व रहमतुल्लाहि व बरकातुहु\n\nTAHAFFUZ-E-AQEEDAH WA MANHAJ\nEk Rozah Tarbiyati Workshop\n\nप्रतिभागी का नाम: ${r.name}\nRegistration No.: ${r.registrationNo}\n\nआपका रजिस्ट्रेशन सफलतापूर्वक पूरा हो गया है।\n\nकृपया ₹50 भुगतान का स्क्रीनशॉट इसी WhatsApp पर साझा करें।\n\nधन्यवाद।`;
   }
+
   if (lang === 'urdu') {
-    return `السلام علیکم ورحمۃ اللہ وبرکاتہ\n\nآپ کی رجسٹریشن کامیابی کے ساتھ مکمل ہو گئی ہے۔\n\nبراہِ کرم ادائیگی کا اسکرین شاٹ شیئر کریں۔\n\nRegistration No.: ${r.registrationNo}`;
+    return `السلام علیکم ورحمۃ اللہ وبرکاتہ\n\nTAHAFFUZ-E-AQEEDAH WA MANHAJ\nEk Rozah Tarbiyati Workshop\n\nشرکاء کا نام: ${r.name}\nRegistration No.: ${r.registrationNo}\n\nآپ کی رجسٹریشن کامیابی کے ساتھ مکمل ہو گئی ہے۔\n\nبراہِ کرم ₹50 ادائیگی کا اسکرین شاٹ اسی WhatsApp پر شیئر کریں۔\n\nجزاکم اللہ خیراً۔`;
   }
-  return `Assalamu'alaikum warahmatullahi wabarakatuhu\n\nYour Registration has been successfully completed.\n\nKindly share your payment screenshot.\n\nRegistration No.: ${r.registrationNo}`;
+
+  return `Assalamu'alaikum warahmatullahi wabarakatuhu\n\nTAHAFFUZ-E-AQEEDAH WA MANHAJ\nEk Rozah Tarbiyati Workshop\n\nParticipant Name: ${r.name}\nRegistration No.: ${r.registrationNo}\n\nYour registration has been successfully completed.\n\nKindly share the ₹50 payment screenshot on this WhatsApp.\n\nJazakAllahu Khairan.`;
 }
 function whatsappPaymentReminder(r) {
   const mobile = String(r.mobile || '').replace(/\D/g, '');
