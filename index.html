@@ -691,7 +691,7 @@ function whatsappPaymentMessage(r) {
   const lang = String(r.language || '').trim().toLowerCase();
 
   if (lang === 'hindi') {
-    return `अस्सालामु अलैकुम व रहमतुल्लाहि व बरकातुहु\n\nTAHAFFUZ-E-AQEEDAH WA MANHAJ\nEk Rozah Tarbiyati Workshop\n\nप्रतिभागी का नाम: ${r.name}\nRegistration No.: ${r.registrationNo}\n\nआपका रजिस्ट्रेशन सफलतापूर्वक पूरा हो गया है।\n\nकृपया ₹50 भुगतान का स्क्रीनशॉट इसी WhatsApp पर साझा करें।\n\nधन्यवाद।`;
+    return `अस्सालामु अलैकुम व रहमतुल्लाहि व बरकातुहु\n\n*TAHAFFUZ-E-AQEEDAH WA MANHAJ*\n*Ek Rozah Tarbiyati Workshop*\n\nप्रतिभागी का नाम: ${r.name}\nRegistration No.: ${r.registrationNo}\n\nआपका रजिस्ट्रेशन सफलतापूर्वक पूरा हो गया है।\n\nकृपया ₹50 भुगतान का स्क्रीनशॉट इसी WhatsApp पर साझा करें।\n\nधन्यवाद।`;
   }
 
   if (lang === 'urdu') {
