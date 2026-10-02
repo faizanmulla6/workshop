@@ -471,10 +471,7 @@ async function chooseCash() {
   finally { btn.disabled = false; btn.textContent = label; }
 }
 async function payGpay() {
-  const url = 'gpay://upi/pay?' + upiParams();
-  const fallback = 'https://pay.google.com/gp/v/u/0/home';
-  try { window.location.href = url; } catch (e) { window.location.href = fallback; }
-  setTimeout(() => { toast('If GPay did not open, scan the QR code using your UPI app.'); }, 1200);
+  return saveQr();
 }
 async function saveQr() {
   try {
