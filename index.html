@@ -741,20 +741,20 @@ function whatsappPaymentMessage(r) {
   // HINDI
   // =========================
   if (lang === 'hindi') {
-    return `अस्सालामु अलैकुम व रहमतुल्लाहि व बरकातुहु\n\n*TAHAFFUZ-E-AQEEDAH WA MANHAJ\nEk Rozah Tarbiyati Workshop*\n\nप्रतिभागी का नाम: ${r.name}\nRegistration No.: ${r.registrationNo}\n\nआपकी रजिस्ट्रेशन डिटेल्स प्राप्त हो गई हैं।\n\nकृपया सीट कन्फर्मेशन के लिए ₹50 भुगतान का स्क्रीनशॉट इसी WhatsApp पर साझा करें।\n\nजज़ाकल्लाहु खैरन।`;
+    return `अस्सालामु अलैकुम व रहमतुल्लाहि व बरकातुहु\n\n*TAHAFFUZ-E-AQEEDAH WA MANHAJ*\n*Ek Rozah Tarbiyati Workshop*\n\nप्रतिभागी का नाम: ${r.name}\nRegistration No.: ${r.registrationNo}\n\nआपकी रजिस्ट्रेशन डिटेल्स प्राप्त हो गई हैं।\n\nकृपया सीट कन्फर्मेशन के लिए ₹50 भुगतान का स्क्रीनशॉट इसी WhatsApp पर साझा करें।\n\nजज़ाकल्लाहु खैरन।`;
   }
 
   // =========================
   // URDU
   // =========================
   if (lang === 'urdu') {
-    return `السلام علیکم ورحمۃ اللہ وبرکاتہ\n\n*TAHAFFUZ-E-AQEEDAH WA MANHAJ\nEk Rozah Tarbiyati Workshop*\n\nشرکاء کا نام: ${r.name}\nRegistration No.: ${r.registrationNo}\n\nآپ کی رجسٹریشن کی تفصیلات موصول ہو گئی ہیں۔\n\nبراہِ کرم نشست کی تصدیق کے لیے ₹50 ادائیگی کا اسکرین شاٹ اسی WhatsApp پر شیئر کریں۔\n\nجزاکم اللہ خیراً۔`;
+    return `السلام علیکم ورحمۃ اللہ وبرکاتہ\n\n*TAHAFFUZ-E-AQEEDAH WA MANHAJ*\n*Ek Rozah Tarbiyati Workshop*\n\nشرکاء کا نام: ${r.name}\nRegistration No.: ${r.registrationNo}\n\nآپ کی رجسٹریشن کی تفصیلات موصول ہو گئی ہیں۔\n\nبراہِ کرم نشست کی تصدیق کے لیے ₹50 ادائیگی کا اسکرین شاٹ اسی WhatsApp پر شیئر کریں۔\n\nجزاکم اللہ خیراً۔`;
   }
 
   // =========================
   // ENGLISH
   // =========================
-  return `Assalamu'alaikum warahmatullahi wabarakatuhu\n\n*TAHAFFUZ-E-AQEEDAH WA MANHAJ\nEk Rozah Tarbiyati Workshop*\n\nParticipant Name: ${r.name}\nRegistration No.: ${r.registrationNo}\n\nYour registration details have been received.\n\nKindly share the ₹50 payment screenshot on this WhatsApp for seat confirmation.\n\nJazakAllahu Khairan.`;
+  return `Assalamu'alaikum warahmatullahi wabarakatuhu\n\n*TAHAFFUZ-E-AQEEDAH WA MANHAJ*\n*Ek Rozah Tarbiyati Workshop*\n\nParticipant Name: ${r.name}\nRegistration No.: ${r.registrationNo}\n\nYour registration details have been received.\n\nKindly share the ₹50 payment screenshot on this WhatsApp for seat confirmation.\n\nJazakAllahu Khairan.`;
 }
 function whatsappPaymentReminder(r) {
   const mobile = String(r.mobile || '').replace(/\D/g, '');
